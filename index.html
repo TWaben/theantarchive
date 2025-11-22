@@ -70,7 +70,10 @@
       font-size: clamp(60px, 10vw, 180px);
       line-height: 0.9; margin: 0;
       background: linear-gradient(180deg, #fff, #888);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
       opacity: 0; animation: fadeUp 1s ease forwards 0.5s;
     }
 
@@ -250,7 +253,9 @@
     </div>
 
     <div class="ant-card" data-hover>
-      <img src="https://images.unsplash.com/photo-1550850733-1402234760b9?q=80&w=1000&auto=format&fit=crop" class="ant-img" alt="Ant">
+      <div class="scan-container">
+        <video autoplay loop muted playsinline class="ant-video" src="paraponera.mp4"></video>
+      </div>
       <div class="card-overlay">
         <span class="ant-sci">Atta cephalotes</span>
         <h3 class="ant-name">Leafcutter</h3>
