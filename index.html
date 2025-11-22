@@ -12,7 +12,7 @@
     :root {
       --bg: #0a0908;
       --amber: #d68c45;
-      --red: #bc3908; /* Couleur ajoutée */
+      --red: #bc3908;
       --amber-glow: rgba(214, 140, 69, 0.3);
       --sand: #f4f1de;
       --glass: rgba(255, 255, 255, 0.03);
@@ -73,7 +73,6 @@
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-
       opacity: 0; animation: fadeUp 1s ease forwards 0.5s;
     }
 
@@ -160,22 +159,17 @@
     @keyframes scrollAnim { 0%{transform:scaleY(0); transform-origin:top} 50%{transform:scaleY(1); transform-origin:top} 51%{transform:scaleY(1); transform-origin:bottom} 100%{transform:scaleY(0); transform-origin:bottom} }
 	
     /* --- Styles Bio-Scan pour l'Overlay Vidéo --- */
-
     .scan-container {
       position: relative; width: 100%; height: 100%; overflow: hidden;
     }
-
-    /* La grille par-dessus */
     .scan-grid {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       background-image: linear-gradient(rgba(214, 140, 69, 0.1) 1px, transparent 1px),
       linear-gradient(90deg, rgba(214, 140, 69, 0.1) 1px, transparent 1px);
       background-size: 20px 20px;
       opacity: 0.5; pointer-events: none;
-      z-index: 10; /* Au-dessus de la vidéo */
+      z-index: 10; 
     }
-
-    /* Le flash d'alerte */
     .scan-alert {
       position: absolute; top: 20px; right: 20px;
       background: rgba(188, 57, 8, 0.2); color: #bc3908;
@@ -184,17 +178,186 @@
       z-index: 50;
       animation: blinkAnim 1s steps(1) infinite;
     }
-
     @keyframes blinkAnim { 50% { opacity: 0; } }
     
-    /* Style pour la vidéo */
     .ant-video {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        filter: brightness(1.1) saturate(1.2); /* Pour accentuer le look */
+        filter: brightness(1.1) saturate(1.2);
     }
 
+    /* --- SECTION TAXONOMIE (STYLE TERMINAL) --- */
+    .taxonomy-section {
+      background: 
+        linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-color: #0a0908;
+      padding: 100px 20px;
+      position: relative;
+      z-index: 10; /* CORRECTION CRITIQUE : Permet à la section d'être au-dessus de la vignette */
+    }
+
+    /* Conteneur principal */
+    .taxo-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header de la section */
+    .taxo-header {
+      margin-bottom: 80px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .taxo-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 60px);
+      color: var(--sand);
+      margin: 0;
+    }
+
+    .taxo-subtitle {
+      font-family: 'Space Grotesk', monospace;
+      color: var(--amber);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    /* Grille Masonry */
+    .taxo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 20px;
+    }
+
+    /* --- DATA CARD STYLE --- */
+    .data-card {
+      background: rgba(20, 20, 20, 0.6);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 40px;
+      position: relative;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+
+    .data-card:hover {
+      border-color: var(--amber);
+      background: rgba(20, 20, 20, 0.9);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .data-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 10px; height: 10px;
+      border-top: 2px solid var(--amber);
+      border-left: 2px solid var(--amber);
+      opacity: 0.5; transition: 0.3s;
+    }
+    .data-card::after {
+      content: '';
+      position: absolute; bottom: 0; right: 0;
+      width: 10px; height: 10px;
+      border-bottom: 2px solid var(--amber);
+      border-right: 2px solid var(--amber);
+      opacity: 0.5; transition: 0.3s;
+    }
+    .data-card:hover::before, .data-card:hover::after {
+      opacity: 1;
+      width: 20px; height: 20px;
+    }
+
+    .card-id {
+      font-family: 'Space Grotesk', monospace;
+      color: #555;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      display: block;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding-bottom: 10px;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      margin: 0 0 20px 0;
+      color: var(--sand);
+    }
+
+    .data-card p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #d0d0d0; /* CORRECTION : Texte plus clair */
+      font-weight: 400;
+    }
+
+    .data-card b, .data-card strong {
+      color: var(--sand);
+      font-weight: 700;
+    }
+
+    .data-card i {
+      color: var(--amber);
+    }
+
+    /* Listes personnalisées */
+    .tech-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+    .tech-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 12px;
+      color: #ccc;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .tech-list li::before {
+      content: '>';
+      position: absolute;
+      left: 0;
+      color: var(--amber);
+      font-weight: bold;
+      font-family: monospace;
+    }
+
+    /* Bouton lien externe */
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: transparent;
+      border: 1px solid var(--amber);
+      color: var(--amber);
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.3s;
+    }
+    .btn-link:hover {
+      background: var(--amber);
+      color: var(--bg);
+    }
+
+    .span-2 { grid-column: span 2; }
+    @media (max-width: 900px) { .span-2 { grid-column: span 1; } }
   </style>
 </head>
 <body>
@@ -235,9 +398,7 @@
     <div class="ant-card" data-hover onclick="window.location.href='paraponera.html'">
   
       <div class="scan-container">
-        
         <video autoplay loop muted playsinline class="ant-video" src="bullet.mp4"></video>
-        
         <div class="scan-grid"></div>
         <div class="scan-alert">⚠ TOXIN DETECTED</div>
       </div>
@@ -278,6 +439,113 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+
+<section class="taxonomy-section" id="taxonomy-guide">
+  <div class="taxo-container">
+    
+    <div class="taxo-header">
+      <div>
+        <div class="taxo-subtitle">// Base de Connaissances</div>
+        <h2 class="taxo-title">Taxonomie &<br>Identification</h2>
+      </div>
+      <div style="max-width: 400px; text-align: right; font-size: 12px; color: #666;">
+        RÉFÉRENCE SYSTÈME : V.2024.12<br>
+        SOURCE: ANTARIUMS ARCHIVES
+      </div>
+    </div>
+
+    <div class="taxo-grid">
+
+      <div class="data-card">
+        <span class="card-id">FILE 000 // INTRO</span>
+        <h3 class="card-title">La Science des Noms</h3>
+        <p>
+          La taxonomie est la science qui classe les organismes vivants. Elle permet de les identifier,
+          les nommer et les organiser selon leurs liens évolutifs en « clades ». 
+          En myrmécologie, c'est la première étape avant l'observation comportementale.
+        </p>
+      </div>
+
+      <div class="data-card span-2">
+        <span class="card-id">FILE 001 // STRUCTURE</span>
+        <h3 class="card-title">I. La Famille Formicidae</h3>
+        <p>
+          Les fourmis appartiennent à l'ordre des <b>Hymenoptera</b> (guêpes, abeilles). 
+          En France, on distingue quatre sous-familles majeures dont la silhouette est un indice clé :
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+          <ul class="tech-list">
+            <li><b>Formicinae</b><br>5 tergites, acidopore (jet d'acide formique).</li>
+            <li><b>Dolichoderinae</b><br>4 tergites, fente anale, odeurs fortes.</li>
+          </ul>
+          <ul class="tech-list">
+            <li><b>Ponerinae</b><br>Étranglement marqué au gastre, souvent primitives.</li>
+            <li><b>Myrmicinae</b><br>Pétiole double (pétiole + post-pétiole).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="data-card">
+        <span class="card-id">FILE 002 // SYNTAXE</span>
+        <h3 class="card-title">II. Règles d'écriture</h3>
+        <p>Le nom scientifique est binomial et s'écrit toujours en <i>italique</i>.</p>
+        <ul class="tech-list">
+          <li><b>Genre</b> : Majuscule (ex: <i>Messor</i>)</li>
+          <li><b>Espèce</b> : Minuscule (ex: <i>barbarus</i>)</li>
+          <li><b>Sous-genre</b> : Entre parenthèses.</li>
+        </ul>
+        <p style="font-size:12px; color:#666; border-top:1px solid #333; padding-top:10px;">
+          Exemple complet : <i>Lasius (Dendrolasius) fuliginosus</i>
+        </p>
+      </div>
+
+      <div class="data-card">
+        <span class="card-id">FILE 003 // LEXIQUE</span>
+        <h3 class="card-title">Codes & Abréviations</h3>
+        <ul class="tech-list">
+          <li><b>sp.</b> : Espèce non identifiée (<i>Lasius sp.</i>).</li>
+          <li><b>spp.</b> : Pluralité d'espèces.</li>
+          <li><b>cf.</b> : Identification incertaine (<i>Lasius cf. niger</i>).</li>
+          <li><b>n. sp.</b> : Nouvelle espèce décrite.</li>
+        </ul>
+      </div>
+
+      <div class="data-card span-2">
+        <span class="card-id">FILE 004 // SCAN RAPIDE</span>
+        <h3 class="card-title">Genres Communs (France)</h3>
+        <div style="column-count: 2; column-gap: 40px;">
+          <ul class="tech-list">
+            <li><b>Lasius</b> : Les plus courantes, noires ou jaunes. Éleveuses de pucerons.</li>
+            <li><b>Messor</b> : Granivores du sud, "pain de fourmi".</li>
+            <li><b>Crematogaster</b> : Gastre en forme de pique (As de Pique).</li>
+            <li><b>Pheidole</b> : Soldats à têtes massives, colonies populeuses.</li>
+            <li><b>Camponotus</b> : Géantes, polymorphisme, charpentières ou terricoles.</li>
+            <li><b>Tetramorium</b> : Petites, épaules carrées, opportunistes.</li>
+            <li><b>Temnothorax</b> : Minuscules, vivent dans des glands ou brindilles.</li>
+            <li><b>Solenopsis</b> : Fourmis de feu ou fourmis voleuses souterraines.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="data-card" style="border-color: var(--amber);">
+        <span class="card-id">FILE 005 // EXTERNAL LINK</span>
+        <h3 class="card-title">Documentation Complète</h3>
+        <p>
+          Les données taxonomiques évoluent constamment. Pour des clés d'identification précises et à jour :
+        </p>
+        <ul class="tech-list">
+          <li>Base de données : <b>AntCat.org</b></li>
+          <li>Wiki communautaire : <b>AntWiki.org</b></li>
+        </ul>
+        <a href="https://v5.antariums.org/guide-taxonomie-identification-et-classification-des-fourmis" target="_blank" class="btn-link">
+          Accéder au Guide Antariums →
+        </a>
+      </div>
+
+    </div>
   </div>
 </section>
 
