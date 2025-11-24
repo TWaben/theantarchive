@@ -49,14 +49,162 @@
       z-index: 1; pointer-events: none;
     }
 
-    /* --- UI GENERALE --- */
+    /* --- UI NAVIGATION COMPLETE --- */
     nav {
-      position: fixed; top: 0; width: 100%; z-index: 100;
+      position: fixed; top: 0; width: 100%; z-index: 1000;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 30px 50px; mix-blend-mode: exclusion;
+      padding: 20px 40px;
+      background: rgba(10, 9, 8, 0.8); /* Fond semi-transparent */
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-    .logo { font-family: 'Playfair Display'; font-weight: 900; font-size: 24px; letter-spacing: 2px; }
-    .menu-btn { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+
+    .nav-left { display: flex; align-items: center; }
+
+    .logo { 
+      font-family: 'Playfair Display'; 
+      font-weight: 900; 
+      font-size: 24px; 
+      letter-spacing: 1px;
+      color: var(--sand);
+      margin-right: 40px;
+      text-decoration: none;
+    }
+
+    /* Menu Central */
+    .nav-center {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-item {
+      position: relative;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #aaa;
+      cursor: pointer;
+      transition: color 0.3s;
+      padding: 10px 0;
+    }
+
+    .nav-item:hover { color: var(--amber); }
+
+    /* --- MENU DÉROULANT (TECH STYLE) --- */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: -20px;
+      background-color: #000;
+      min-width: 260px; /* Élargi pour les titres longs */
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      padding: 10px 0;
+      border-radius: 4px;
+      flex-direction: column;
+      margin-top: 15px; /* Espace visuel */
+    }
+
+    /* Le Pont Invisible (Garde le menu ouvert) */
+    .dropdown-content::before {
+      content: "";
+      position: absolute;
+      top: -20px;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      background: transparent;
+    }
+
+    /* Afficher au survol */
+    .nav-item:hover .dropdown-content {
+      display: flex;
+      animation: slideDown 0.2s ease forwards;
+    }
+
+    /* Style des liens "Tech" */
+    .dropdown-content a {
+      color: #888;
+      padding: 12px 20px 12px 35px; /* Espace à gauche pour le marqueur */
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+      border-left: 2px solid transparent;
+      white-space: nowrap; /* Empêche le texte de passer à la ligne */
+    }
+
+    /* Marqueur géométrique (Losange) */
+    .dropdown-content a::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+      width: 6px;
+      height: 6px;
+      border: 1px solid #444;
+      transition: all 0.3s ease;
+    }
+
+    /* Hover sur les liens */
+    .dropdown-content a:hover {
+      background: rgba(255,255,255,0.03);
+      color: var(--sand);
+      padding-left: 40px;
+      border-left: 2px solid var(--amber);
+    }
+
+    .dropdown-content a:hover::before {
+      background-color: var(--amber);
+      border-color: var(--amber);
+      box-shadow: 0 0 8px var(--amber);
+    }
+
+    /* --- PARTIE DROITE (Réseaux / Langue) --- */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .social-icon {
+      color: #fff;
+      font-size: 14px;
+      opacity: 0.7;
+      transition: 0.3s;
+      text-decoration: none;
+      font-family: 'Space Grotesk';
+    }
+    .social-icon:hover { opacity: 1; color: var(--amber); }
+
+    .lang-selector {
+      border: 1px solid #333;
+      padding: 5px 10px;
+      font-size: 12px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Navigation */
+    @media (max-width: 900px) {
+      .nav-center, .nav-right { display: none; }
+      nav::after { content: 'MENU ///'; color: var(--amber); font-size: 14px; letter-spacing: 2px; }
+    }
 
     /* --- HERO SECTION --- */
     .hero {
@@ -82,7 +230,7 @@
       opacity: 0; animation: fadeUp 1s ease forwards 0.8s;
     }
 
-    /* Barre de recherche "Biologique" */
+    /* Barre de recherche */
     .search-container {
       margin-top: 60px; position: relative;
       width: 100%; max-width: 600px;
@@ -196,7 +344,7 @@
       background-color: #0a0908;
       padding: 100px 20px;
       position: relative;
-      z-index: 10; /* CORRECTION CRITIQUE : Permet à la section d'être au-dessus de la vignette */
+      z-index: 10; /* IMPORTANT: Garde la section au-dessus du fond vignette */
     }
 
     /* Conteneur principal */
@@ -299,7 +447,7 @@
     .data-card p {
       font-size: 15px;
       line-height: 1.6;
-      color: #d0d0d0; /* CORRECTION : Texte plus clair */
+      color: #d0d0d0;
       font-weight: 400;
     }
 
@@ -365,8 +513,44 @@
 <div id="cursor"></div>
 
 <nav>
-  <div class="logo">MYRMEX.</div>
-  <div class="menu-btn">Menu ///</div>
+  <div class="nav-left">
+    <a href="#" class="logo">MYRMEX.</a>
+  </div>
+
+  <div class="nav-center">
+    <div class="nav-item">
+      Guides ▾
+      <div class="dropdown-content">
+        <a href="#">LA DIAPAUSE</a>
+        <a href="#">PRÉPARER LES VACANCES</a>
+        <a href="#">CONSTRUCTION D'UN NID</a>
+      </div>
+    </div>
+    
+    <div class="nav-item">
+      Fiches d'élevage ▾
+      <div class="dropdown-content">
+        <a href="#"> EUROPE</a>
+        <a href="#"> AFRIQUE</a>
+        <a href="#"> AMERIQUE DU SUD</a>
+        <a href="#"> AMERIQUE DU NORD</a>
+        <a href="#"> ASIE</a>
+        <a href="#"> OCEANIE</a>
+      </div>
+    </div>
+
+    <div class="nav-item">Ressources ▾</div>
+  </div>
+
+  <div class="nav-right">
+    <a href="#" class="social-icon">IG</a>
+    <a href="#" class="social-icon">DC</a>
+    <a href="#" class="social-icon">YT</a>
+    
+    <div class="lang-selector">
+      🇫🇷 FR ▾
+    </div>
+  </div>
 </nav>
 
 <canvas id="swarmCanvas"></canvas>
@@ -395,7 +579,7 @@
   
   <div class="grid">
     
-    <div class="ant-card" data-hover onclick="window.location.href='paraponera.html'">
+    <div class="ant-card" data-hover onclick="window.location.href='Fiche/paraponera_clavata/paraponera.html'">
   
       <div class="scan-container">
         <video autoplay loop muted playsinline class="ant-video" src="bullet.mp4"></video>
