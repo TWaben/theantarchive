@@ -96,7 +96,6 @@
     .light-mode #cursor.hovered { background: rgba(214, 140, 69, 0.8); border: none; opacity: 1; }
 
     /* --- NAVIGATION NOUVEAU STYLE (INDEX.HTML) --- */
-    /* REMPLACER .nav-bar par nav pour correspondre à index.html */
     nav {
       position: fixed; top: 0; width: 100%; z-index: 1000;
       display: flex; justify-content: space-between; align-items: center;
@@ -105,7 +104,7 @@
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       transition: background 0.5s, border 0.5s;
-      mix-blend-mode: normal; /* S'assurer que le mix-blend-mode est normal ici */
+      mix-blend-mode: normal; 
     }
 
     .nav-left { display: flex; align-items: center; }
@@ -127,7 +126,7 @@
     /* Dropdown */
     .dropdown-content {
       display: none; position: absolute; top: 100%; left: -20px;
-      background-color: var(--bg); /* Adaptatif */
+      background-color: var(--bg); 
       min-width: 260px; border: 1px solid var(--border);
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       padding: 10px 0; border-radius: 4px; flex-direction: column; margin-top: 15px;
@@ -166,9 +165,9 @@
     
     @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* === TOGGLE SWITCH STYLE (Repris de l'existant, ajusté) === */
-    .toggle-group { display: flex; align-items: center; gap: 10px; margin-right: 15px; } /* Ajouté margin-right pour l'alignement */
-    .toggle-group i { color: var(--text-secondary); font-size: 14px; } /* Utiliser text-secondary pour les icônes */
+    /* === TOGGLE SWITCH STYLE === */
+    .toggle-group { display: flex; align-items: center; gap: 10px; margin-right: 15px; } 
+    .toggle-group i { color: var(--text-secondary); font-size: 14px; } 
     
     #theme-toggle {
         position: relative; display: inline-block; width: 45px; height: 24px;
@@ -200,32 +199,30 @@
       .span-2 { grid-column: span 1; }
     }
     
-    /* --- Styles du corps (non modifiés) --- */
+    /* --- CORRECTION CSS POUR L'AFFICHAGE DU MODÈLE --- */
     .light-mode .knob { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
     .light-mode #theme-toggle[data-active="true"] .slider { background-color: var(--toggle-color-active); }
     
     .container {
       display: grid;
       grid-template-columns: 45% 55%;
-      height: 100vh;
-      /* Ajustement pour la barre de navigation index.html */
-      margin-top: 0; /* Important si on ajoute un padding au body ou section */
+      min-height: 100vh; /* Permet à la page de s'étendre si le contenu est long */
+      margin-top: 0; 
       padding-top: 0;
     }
     .visual-col {
       position: relative;
-      height: 100%;
+      /* CLÉ : Assure que la colonne visuelle prend toute la hauteur de l'écran */
+      height: 100vh; 
       border-right: 1px solid var(--border);
       overflow: hidden;
-      /* Ajustement pour que la nav ne chevauche pas le contenu au top */
-      padding-top: 80px; /* Ajout d'un padding pour décaler le contenu sous la nav fixe */
+      padding-top: 80px; 
     }
     .data-col {
       padding: 80px 60px;
       overflow-y: auto;
       background: var(--bg-gradient);
-      /* Ajustement pour que la nav ne chevauche pas le contenu au top */
-      padding-top: 100px; /* Ajout d'un padding pour décaler le contenu sous la nav fixe */
+      padding-top: 100px; 
     }
     
     /* Le reste des styles de paraponera.html */
@@ -362,7 +359,7 @@
     @media (max-width: 1200px) { .taxonomy-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 900px) {
       .container { grid-template-columns: 1fr; height: auto; }
-      .visual-col { height: 50vh; border-right: none; }
+      .visual-col { height: 50vh; border-right: none; } /* Hauteur réduite pour mobile */
       .data-col { padding: 40px 20px; }
       h1 { font-size: 50px; }
       .details-section, footer { padding: 40px 20px; margin-top: 0; }
@@ -379,7 +376,7 @@
 
 <nav>
   <div class="nav-left">
-    <a href="../../index.html" class="logo">MYRMEX.</a>
+    <a href="../index.html" class="logo">MYRMEX.</a>
   </div>
 
   <div class="nav-center">
@@ -433,7 +430,7 @@
     <model-viewer 
       src="../model3d/paraponera_clavata1.glb" alt="Paraponera clavata 3D"
       auto-rotate camera-controls environment-image="neutral" shadow-intensity="1"
-      style="width:100%; height:100%; background: #000;">
+      style="width:100%; height:100%; background: #000; display: block;">
     </model-viewer>
     <div class="img-overlay">
       <div style="font-family:'JetBrains Mono'; font-size:12px; color:var(--amber)">SPECIMEN VIEW /// MACRO LENS</div>
@@ -513,7 +510,7 @@
         
         <div class="footer-col">
             <h4>Exploration</h4>
-            <a href="index.html" class="footer-link" data-hover>Index des Espèces</a>
+            <a href="../index.html" class="footer-link" data-hover>Index des Espèces</a>
             <a href="#" class="footer-link" data-hover>Carte Géographique</a>
             <a href="#" class="footer-link" data-hover>Taxonomie</a>
             <a href="#" class="footer-link" data-hover>Recherche Avancée</a>
@@ -557,13 +554,13 @@
     if (isLight) {
       body.classList.add('light-mode');
       themeToggle.setAttribute('data-active', 'true');
-      moonIcon.style.color = 'var(--text-secondary)'; /* Changé de text-label à text-secondary pour correspondre à index.html */
+      moonIcon.style.color = 'var(--text-secondary)'; 
       sunIcon.style.color = 'var(--amber)'; 
     } else {
       body.classList.remove('light-mode');
       themeToggle.setAttribute('data-active', 'false');
       moonIcon.style.color = 'var(--amber)';
-      sunIcon.style.color = 'var(--text-secondary)'; /* Changé de text-label à text-secondary pour correspondre à index.html */
+      sunIcon.style.color = 'var(--text-secondary)'; 
     }
   }
 
@@ -597,7 +594,6 @@
   });
   
   function refreshHoverListeners() {
-    /* Mise à jour des sélecteurs pour inclure les nouveaux éléments de nav */
     document.querySelectorAll('[data-hover], a, .nav-item, .lang-selector, .social-icon, #theme-toggle').forEach(el => {
       el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
@@ -628,7 +624,17 @@
   const mouseDistance = 150;
   let mouse = { x: null, y: null };
 
-  window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+  // Note: Pour que cela fonctionne correctement, l'événement 'mousemove' doit
+  // être déclenché sur l'élément englobant la section pour avoir les coordonnées
+  // relatives, mais ici nous utilisons les coordonnées de la fenêtre (e.x, e.y).
+  // La correction dans Particle.update() devrait gérer cela :
+  const swarmSection = document.querySelector('.details-section');
+  swarmSection.addEventListener('mousemove', (e) => {
+    const rect = swarmSection.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+
   window.addEventListener('resize', init);
   
   class Particle {
@@ -642,12 +648,12 @@
       if (this.x < 0 || this.x > w) this.vx *= -1;
       if (this.y < 0 || this.y > h) this.vy *= -1;
 
-      const rect = canvas.getBoundingClientRect();
-      let dx = (mouse.x - rect.left) - this.x;
-      let dy = (mouse.y - rect.top) - this.y;
+      // Correction pour calculer la distance à la souris basée sur la section Canvas
+      let dx = mouse.x - this.x;
+      let dy = mouse.y - this.y;
       let dist = Math.sqrt(dx*dx + dy*dy);
 
-      if (dist < mouseDistance) {
+      if (dist < mouseDistance && mouse.x !== null) {
         let force = (mouseDistance - dist) / mouseDistance;
         this.vx -= (dx/dist) * force * 0.08;
         this.vy -= (dy/dist) * force * 0.08;
@@ -679,7 +685,6 @@
         let dist = Math.sqrt(dx*dx + dy*dy);
         if (dist < connectionDistance) {
           ctx.beginPath();
-          /* La couleur de la ligne utilise toujours l'opacité sur l'ambre par défaut */
           ctx.strokeStyle = `rgba(214, 140, 69, ${0.2 * (1 - dist/connectionDistance)})`;
           ctx.lineWidth = 0.5; ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
         }
