@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MYRMEX | Guide : Préparer un départ en vacances</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* MODE SOMBRE (DÉFAUT) */
+      --bg: #0a0908;
+      --bg-gradient: radial-gradient(circle at top right, #1a1510, var(--bg));
+      --amber: #d68c45;
+      --red: #bc3908;
+      --sand: #f4f1de;
+      --glass: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 255, 255, 0.1);
+      --text-main: white;
+      --text-secondary: #bbb;
+      --text-label: #666;
+      --bar-bg: #222;
+      --footer-bg: #050505;
+      --footer-text-main: #666;
+      --footer-text-link: #888;
+      --toggle-color-active: #0078d4; 
+      --toggle-color-inactive: #505050; 
+      --toggle-knob: white;
+      --glass-nav: rgba(10, 9, 8, 0.8);
+    }
+
+    /* MODE CLAIR */
+    .light-mode {
+      --bg: #fdfdfd;
+      --bg-gradient: radial-gradient(circle at top right, #f4f1de, var(--bg));
+      --amber: #a35f21;
+      --red: #8b2b00;
+      --sand: #1c1c1c;
+      --glass: rgba(0, 0, 0, 0.05);
+      --border: rgba(0, 0, 0, 0.1);
+      --text-main: #1c1c1c;
+      --text-secondary: #444;
+      --text-label: #888;
+      --bar-bg: #eee;
+      --footer-bg: #f4f1de;
+      --footer-text-main: #666;
+      --footer-text-link: #444;
+      --toggle-color-inactive: #cccccc; 
+      --toggle-knob: #ffffff; 
+      --glass-nav: rgba(253, 253, 253, 0.9);
+    }
+
+    * { box-sizing: border-box; cursor: none; }
+
+    body {
+      margin: 0; background: var(--bg); color: var(--sand);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+      transition: background-color 0.5s, color 0.5s;
+    }
+
+    /* --- CURSEUR --- */
+    #cursor {
+      position: fixed; top:0; left:0; width: 20px; height: 20px;
+      border: 1px solid var(--amber); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      mix-blend-mode: exclusion;
+    }
+    #cursor.hovered { 
+      width: 60px; height: 60px; 
+      background: var(--amber);
+      border: none; 
+      opacity: 0.7;
+    }
+    .light-mode #cursor { mix-blend-mode: normal; border: 1px solid var(--amber); }
+    .light-mode #cursor.hovered { background: rgba(214, 140, 69, 0.8); border: none; opacity: 1; }
+
+    /* --- NAVIGATION --- */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 40px;
+      background: var(--glass-nav);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.5s, border 0.5s;
+      mix-blend-mode: normal; 
+    }
+    .nav-left { display: flex; align-items: center; }
+    .logo { 
+      font-family: 'Playfair Display'; font-weight: 900; font-size: 24px; 
+      letter-spacing: 1px; color: var(--text-main); margin-right: 40px; text-decoration: none;
+    }
+    .nav-center { display: flex; gap: 30px; align-items: center; }
+    .nav-item {
+      position: relative; font-size: 14px; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text-secondary); cursor: pointer;
+      transition: color 0.3s; padding: 10px 0;
+    }
+    .nav-item:hover { color: var(--amber); }
+    .dropdown-content {
+      display: none; position: absolute; top: 100%; left: -20px;
+      background-color: var(--bg); 
+      min-width: 260px; border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      padding: 10px 0; border-radius: 4px; flex-direction: column; margin-top: 15px;
+    }
+    .nav-item:hover .dropdown-content { display: flex; animation: slideDown 0.2s ease forwards; }
+    .dropdown-content a {
+      color: var(--text-secondary); padding: 12px 20px 12px 35px;
+      text-decoration: none; display: flex; align-items: center;
+      font-family: 'Space Grotesk', monospace; font-size: 12px; letter-spacing: 1px;
+      transition: all 0.3s ease; position: relative; border-left: 2px solid transparent; white-space: nowrap;
+    }
+    .dropdown-content a:hover { background: var(--glass); color: var(--text-main); padding-left: 40px; border-left: 2px solid var(--amber); }
+
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .social-icon { color: var(--text-main); font-size: 14px; opacity: 0.7; transition: 0.3s; text-decoration: none; }
+    .social-icon:hover { opacity: 1; color: var(--amber); }
+    
+    /* === TOGGLE SWITCH STYLE (conservé) === */
+    .toggle-group { display: flex; align-items: center; gap: 10px; margin-right: 15px; } 
+    .toggle-group i { color: var(--text-secondary); font-size: 14px; } 
+    #theme-toggle { position: relative; display: inline-block; width: 45px; height: 24px; cursor: pointer; user-select: none; }
+    .slider { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--toggle-color-inactive); border-radius: 24px; transition: 0.4s; box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1); }
+    .knob { position: absolute; content: ""; height: 20px; width: 20px; left: 2px; bottom: 2px; background-color: var(--toggle-knob); border-radius: 50%; transition: 0.4s; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); }
+    #theme-toggle[data-active="true"] .slider { background-color: var(--toggle-color-active); }
+    #theme-toggle[data-active="true"] .knob { transform: translateX(21px); }
+
+    /* === GUIDE LAYOUT === */
+    .guide-hero {
+      padding: 150px 20px 80px 20px;
+      text-align: center;
+      background: var(--bg-gradient);
+    }
+    .guide-hero h1 {
+      font-family: 'Playfair Display'; font-size: 60px; line-height: 0.9; margin: 0 0 10px 0;
+      color: var(--text-main);
+    }
+    .guide-hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 18px;
+      color: var(--text-secondary);
+    }
+    
+    /* NOUVEAU CONTENEUR DE CENTRAGE */
+    .hero-content-wrapper {
+        display: flex;
+        justify-content: center; /* Centrage horizontal de l'ensemble (Breadcrumbs + Image) */
+        width: 100%; 
+        padding: 0 20px; 
+        margin-top: 50px; 
+        margin-bottom: 50px;
+    }
+    
+    /* NOUVEAU CONTENEUR POUR L'ALIGNEMENT IMAGE/BREADCRUMBS */
+    .hero-content-alignment {
+        max-width: 900px;
+        display: flex; 
+        /* MODIFICATION CLÉ: Aligner les éléments à gauche dans ce sous-conteneur */
+        justify-content: flex-start; 
+        align-items: flex-start; 
+        gap: 80px; /* Espace entre le fil d'Ariane et l'image */
+        width: 100%;
+    }
+
+    .guide-article-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 50px 20px 100px 20px;
+      min-height: 80vh;
+    }
+    
+    /* NOUVEAU STYLE POUR L'IMAGE */
+    .guide-image {
+      display: block;
+      max-width: 350px; /* Taille maximale de l'illustration */
+      width: 100%;
+      height: auto;
+      margin: 0; /* Suppression des marges auto pour Flexbox */
+    }
+
+    /* Guide Text Styling */
+    .guide-article-container h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      color: var(--amber);
+      margin-top: 80px; /* AUGMENTÉ */
+      margin-bottom: 30px; /* AUGMENTÉ */
+      padding-top: 30px; /* AUGMENTÉ */
+      border-top: 1px solid var(--border);
+    }
+    .guide-article-container h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 24px;
+        color: var(--text-main);
+        margin-top: 50px; /* AUGMENTÉ */
+        margin-bottom: 20px; /* AUGMENTÉ */
+    }
+    .guide-article-container p {
+        line-height: 1.8; color: var(--text-secondary); font-size: 16px; 
+        margin-bottom: 30px; /* AUGMENTÉ */
+    }
+    .guide-article-container ul {
+        list-style: none;
+        padding-left: 0;
+        color: var(--text-secondary);
+        margin-bottom: 50px; /* AUGMENTÉ */
+    }
+    .guide-article-container li {
+        margin-bottom: 10px;
+        line-height: 1.6;
+        position: relative;
+        padding-left: 20px;
+    }
+    .guide-article-container li::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: var(--amber);
+        font-size: 18px;
+        line-height: 1;
+    }
+
+    .recette {
+        background: var(--glass);
+        border: 1px solid var(--border);
+        padding: 25px;
+        margin: 40px 0;
+    }
+    .recette h4 {
+        color: var(--amber);
+        font-family: 'JetBrains Mono';
+        font-size: 14px;
+        text-transform: uppercase;
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+    .recette ul {
+        /* Les styles par défaut de .guide-article-container ul sont écrasés par les styles inline */
+        list-style-type: none; 
+        padding-left: 0; 
+        color: var(--text-main);
+        font-family: 'JetBrains Mono';
+    }
+    .recette li {
+        color: var(--text-main);
+        font-family: 'JetBrains Mono';
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    .warning-box {
+      margin-top: 20px; display: flex; gap: 15px; align-items: flex-start;
+      background: rgba(214, 140, 69, 0.1); border: 1px solid rgba(214, 140, 69, 0.3);
+      padding: 15px; color: var(--amber); font-size: 14px;
+    }
+    .warning-box div { color: var(--text-secondary); }
+    .light-mode .warning-box { background: rgba(214, 140, 69, 0.05); border: 1px solid rgba(214, 140, 69, 0.15); }
+
+
+    /* --- FIL D'ARIANE (Breadcrumbs) POSITIONNEMENT FINAL --- */
+    .breadcrumbs {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+    }
+    .breadcrumbs a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .breadcrumbs a:hover {
+      color: var(--amber);
+    }
+    .breadcrumbs .separator {
+      margin: 0 8px;
+      color: var(--text-label);
+      font-size: 12px;
+    }
+    .breadcrumbs span:last-child {
+      color: var(--text-main);
+    }
+    /* --- FIN FIL D'ARIANE --- */
+
+
+    /* --- FOOTER (conservé) --- */
+    footer {
+        background: var(--footer-bg);
+        border-top: 1px solid var(--border);
+        padding: 80px 60px 30px;
+        position: relative; z-index: 10;
+        font-family: 'Space Grotesk', sans-serif;
+    }
+    .footer-content {
+        display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px;
+        margin-bottom: 80px; max-width: 1400px; margin-left: auto; margin-right: auto;
+    }
+    .footer-brand h2 {
+        font-family: 'Playfair Display'; font-size: 24px; color: var(--text-main); margin: 0 0 20px 0;
+    }
+    .footer-brand p {
+        color: var(--footer-text-main); font-size: 14px; max-width: 300px; margin: 0; padding: 0;
+    }
+    .footer-col h4 {
+        font-family: 'JetBrains Mono'; font-size: 12px; text-transform: uppercase;
+        color: var(--amber); margin-bottom: 25px; letter-spacing: 1px;
+    }
+    .footer-link {
+        display: block; color: var(--footer-text-link); text-decoration: none; margin-bottom: 12px;
+        font-size: 14px; transition: 0.3s;
+    }
+    .footer-link:hover { color: var(--text-main); transform: translateX(5px); }
+    
+    .footer-bottom {
+        border-top: 1px solid var(--border); padding-top: 30px;
+        display: flex; justify-content: space-between; align-items: center;
+        font-family: 'JetBrains Mono'; font-size: 11px; color: var(--footer-text-main);
+        max-width: 1400px; margin-left: auto; margin-right: auto;
+    }
+    .sys-status { display: flex; align-items: center; gap: 8px; }
+    .status-dot { width: 6px; height: 6px; background: #2ecc71; border-radius: 50%; box-shadow: 0 0 5px #2ecc71; }
+
+    /* ANIMATIONS */
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    .animated-item { opacity: 0; transform: translateY(20px); }
+    .animated-item.is-visible { animation: fadeIn 0.8s ease forwards; }
+    .d-1 { animation-delay: 0.1s; } .d-2 { animation-delay: 0.2s; } .d-3 { animation-delay: 0.3s; }
+    .d-4 { animation-delay: 0.4s; } .d-5 { animation-delay: 0.5s; } .d-6 { animation-delay: 0.6s; }
+    
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .nav-center, .nav-right { display: none; }
+      nav::after { content: 'MENU ///'; color: var(--amber); font-size: 14px; letter-spacing: 2px; }
+      .guide-hero h1 { font-size: 40px; }
+      .guide-article-container h2 { font-size: 30px; }
+      .guide-article-container h3 { font-size: 20px; }
+      .footer-content { grid-template-columns: 1fr; gap: 40px; }
+      
+      /* Ajustement pour les petits écrans */
+      .hero-content-wrapper {
+          padding: 0;
+      }
+      .hero-content-alignment {
+        flex-direction: column; 
+        align-items: center; /* Centrer les éléments l'un sur l'autre (vertical) */
+        gap: 30px;
+        margin-top: 30px; 
+        margin-bottom: 30px;
+      }
+      .breadcrumbs {
+          text-align: center; /* Centre le fil d'Ariane sur mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<nav>
+  <div class="nav-left">
+    <a href="../index.html" class="logo">MYRMEX.</a>
+  </div>
+
+  <div class="nav-center">
+    <div class="nav-item">
+      Guides ▾
+      <div class="dropdown-content">
+        <a href="#">LA DIAPAUSE</a>
+        <a href="guide-vacances.html">PRÉPARER LES VACANCES</a>
+        <a href="#">CONSTRUCTION D'UN NID</a>
+      </div>
+    </div>
+    
+    <div class="nav-item">
+      Fiches d'élevage ▾
+      <div class="dropdown-content">
+        <a href="#"> EUROPE</a>
+        <a href="#"> AFRIQUE</a>
+        <a href="#"> AMERIQUE DU SUD</a>
+        <a href="#"> AMERIQUE DU NORD</a>
+        <a href="#"> ASIE</a>
+        <a href="#"> OCEANIE</a>
+      </div>
+    </div>
+
+    <div class="nav-item">Ressources ▾</div>
+  </div>
+
+  <div class="nav-right">
+    <div class="toggle-group">
+        <i class="fas fa-moon" id="moon-icon"></i> 
+        <div id="theme-toggle" data-hover data-active="false">
+            <span class="slider"></span>
+            <span class="knob"></span>
+        </div>
+        <i class="fas fa-sun" id="sun-icon"></i> 
+    </div>
+
+    <a href="#" class="social-icon" data-hover>IG</a>
+    <a href="#" class="social-icon" data-hover>DC</a>
+    <a href="#" class="social-icon" data-hover>YT</a>
+    
+    <div class="lang-selector" data-hover>
+      🇫🇷 FR ▾
+    </div>
+  </div>
+</nav>
+
+<main>
+    <div class="guide-hero animated-item d-1">
+        <span class="label" style="color:var(--amber); margin-bottom:5px;">GUIDE D'ÉLEVAGE</span>
+        <h1>Préparer un départ en vacances</h1>
+        <p>
+            Le départ en vacances peut être source d'inquiétude. Voici différentes astuces pour partir l'esprit léger et assurer la survie de vos protégées durant votre absence.
+        </p>
+    </div>
+
+    <div class="hero-content-wrapper">
+        <div class="hero-content-alignment">
+            
+            <div class="breadcrumbs">
+                <a href="../index.html" data-hover>Accueil</a>
+                <span class="separator">&gt;</span>
+                <a href="#" data-hover>Guides</a>
+                <span class="separator">&gt;</span>
+                <span style="color:var(--amber);">Vacance</span>
+            </div>
+            
+            <img 
+                src="../photo/vacance.png"
+                alt="Illustration minimaliste du départ en vacances des fourmis."
+                class="guide-image animated-item d-2" 
+                style="animation-delay: 0.1s;"
+            />
+        </div>
+    </div>
+    <div class="guide-article-container">
+        
+        <h2 class="animated-item d-3">Introduction</h2>
+        
+        <p class="animated-item d-3">
+            Lorsque l'on maintient des fourmis, le départ en vacances peut être à l'origine de nombreuses inquiétudes et de doutes. Ce guide a pour but de résumer différentes astuces qui vous permettront de partir plus sereinement de votre domicile sans craindre de tuer vos protégées durant cette période.
+        </p>
+        <div class="warning-box animated-item d-4">
+            <span style="font-size:20px">✨</span>
+            <div>
+                <b>ASTUCE ULTIME : L'ANT-SITTING</b><br>
+                Si vous ne partez pas, n'hésitez pas à proposer à d'autres éleveurs de votre région de garder leurs fondations et colonies. L’« ant-sitting » reste le meilleur moyen de partir sereinement et permet à d'autres éleveurs de découvrir de nouvelles espèces.
+            </div>
+        </div>
+        
+        <h2 class="animated-item d-4">Chapitre I : S'organiser pour préparer une absence</h2>
+        
+        <h3 class="animated-item d-4">Absence courte (une semaine)</h3>
+        <p class="animated-item d-4">
+            Pour une absence de quelques jours, il suffira normalement de donner une bonne quantité de nourriture avant le départ et de s'assurer que votre tube ou vos abreuvoirs contiennent assez d'eau.
+        </p>
+        <ul>
+            <li class="animated-item d-4">Si vous maintenez des fourmis strictement carnivores (telles que les Ponerinae), il faudra demander à quelqu'un de venir chez vous pour leur donner des insectes avec une fréquence de nourrissage similaire à la vôtre.</li>
+            <li class="animated-item d-4">Si c'est la première fois que vous utilisez des abreuvoirs, il est fortement recommandé de tester à l'avance la réaction de vos colonies (elles peuvent s'y noyer ou mettre du substrat dans les arrivées d'eau).</li>
+        </ul>
+
+        <h3 class="animated-item d-5">Absence d'une à deux semaines</h3>
+        <p class="animated-item d-5">
+            Si votre absence dure plus d'une semaine, il sera recommandé de demander à quelqu'un de passer nourrir vos fourmis. Soyez rassuré : la majorité des espèces ne nécessite pas d'apport en insectes obligatoire pour une absence courte, mais requiert néanmoins un apport en **liquide sucré**.
+        </p>
+        <ul>
+            <li class="animated-item d-5">**Gelée nutritive :** Il est possible de préparer à l'avance du Bhaktar (recette ci-dessous) qu'il suffira de mettre au congélateur, ou d'acheter des gelées nutritives imputrescibles (Beetle Jelly).</li>
+            <li class="animated-item d-5">Pour les petites colonies, une bonne portion de Bhaktar ou un morceau de gelée pourra amplement suffire pour leur permettre de passer une semaine sans intervention extérieure.</li>
+            <li class="animated-item d-5">**Cas particulier des Granivores :** Les espèces granivores (telles que les *Messor sp.*) ne nécessitent pas d'apport en nourriture si leur réserve de graines est correctement remplie, mais elles auront besoin d'eau à profusion pour éviter une hécatombe.</li>
+        </ul>
+
+        <h3 class="animated-item d-6">Absence longue (3 semaines et plus)</h3>
+        <p class="animated-item d-6">
+            Ici, plus de solution miracle : il faudra impérativement qu'un de vos proches passe régulièrement pour nourrir et remplir les abreuvoirs. Vous pouvez également emmener vos fourmis avec vous, s'il ne s'agit pas d'espèces trop sujettes au stress.
+        </p>
+
+
+        <h2 class="animated-item d-6">Chapitre II : Gérer les problèmes de nourriture</h2>
+        <p class="animated-item d-6">
+            La majorité des espèces de fourmis est capable de survivre plusieurs jours, voire quelques semaines sans aliments frais. Cependant, les nourrir avant et pendant votre absence limitera d'éventuelles pertes.
+        </p>
+        
+        <div class="recette animated-item d-6">
+            <h4>Recette d'aliment artificiel Bhaktar et Whitcomb</h4>
+            <p style="font-size:14px; color:var(--text-secondary); margin-bottom:10px;">
+                Aliment complet, à longue conservation, utilisé pour nourrir toutes les espèces de fourmis omnivores.
+            </p>
+            <h4 style="margin-top:20px;">Ingrédients :</h4>
+            
+            <ul style="list-style: none; padding-left:20px; font-family:'Space Grotesk'; font-size:14px;">
+                <li style="color:var(--text-main); margin-bottom:5px;">5 g d'agar-agar</li>
+                <li style="color:var(--text-main); margin-bottom:5px;">62 mL de miel</li>
+                <li style="color:var(--text-main); margin-bottom:5px;">1 œuf entier (jaune et blanc)</li>
+                <li style="color:var(--text-main); margin-bottom:5px;">500 ml d'eau</li>
+                <li style="color:var(--text-main); margin-bottom:5px;">Optionnel : Une capsule de vitamines pour enfants (similaire à McKesson Bexel)</li>
+            </ul>
+
+            <h4 style="margin-top:20px;">Préparation :</h4>
+            <ol style="list-style: none; padding-left:20px; font-family:'Space Grotesk'; font-size:14px;">
+                <li style="color:var(--text-secondary);">Portez à ébullition 250 mL d'eau et dissolvez l'agar-agar dedans.</li>
+                <li style="color:var(--text-secondary);">Laissez le mélange refroidir un peu au-dessus de la température ambiante, sans le laisser se solidifier.</li>
+                <li style="color:var(--text-secondary);">Mixez ensemble les 250 mL d'eau restants, le miel, l'œuf et la capsule de vitamine (si utilisée) jusqu'à homogénéisation complète.</li>
+                <li style="color:var(--text-secondary);">Versez le mélange dans l'agar-agar.</li>
+                <li style="color:var(--text-secondary);">Coulez le tout dans des moules ou dans des bacs à glaçons.</li>
+            </ol>
+            <p style="font-size:14px; color:var(--text-secondary); margin-top:20px;">
+                Conservez au réfrigérateur (3 semaines) ou au congélateur.
+            </p>
+        </div>
+
+        <h3 class="animated-item d-6">Beetle Jelly (Gelée de Scarabée)</h3>
+        <p class="animated-item d-6">
+            Les Beetle Jelly sont également une bonne source de nourriture lors de longues absences. Celles conçues pour les scarabées japonais sont les plus optimisées, car elles sèchent moins vite et sont plus complètes nutritivement parlant.
+        </p>
+        
+        
+        <h2 class="animated-item d-6">Chapitre III : Hydrater ses fourmis</h2>
+        <p class="animated-item d-6">
+            L'hydratation est cruciale. Il faudra veiller à mettre de l'eau à disposition en quantité suffisante, en prévision d'éventuelles fortes chaleures.
+        </p>
+        <ul>
+            <li class="animated-item d-6">L'eau peut être mise sous forme d'abreuvoirs ou de tubes uniquement prévus à cet escient.</li>
+            <li class="animated-item d-6">Les systèmes d'humidification des nids doivent être vérifiés. Pour les systèmes ne retenant l'eau que quelques jours, placez des tubes de « fondation » (avec réserve d'eau) connectés à l'aire de chasse. La colonie y déménagera le couvain si l'humidité du nid chute.</li>
+            <li class="animated-item d-6">En prévision d'une canicule, ajoutez un tube ou un abreuvoir rempli d'eau dans l'aire de chasse. Si vos fourmis peuvent survivre à un manque de nourriture sur une courte période, une déshydratation ne pardonnera pas.</li>
+        </ul>
+
+        
+        <h2 class="animated-item d-6">Chapitre IV : Vérifier ses installations</h2>
+        <p class="animated-item d-6">
+            En plus de la nourriture et de l'eau, une vérification du matériel est indispensable :
+        </p>
+        <ul>
+            <li class="animated-item d-6">Vérifiez les installations (tubes, tuyaux de liaison, bouchon, joints, anti-évasion, dépotoir) afin d'éviter une possible évasion ou catastrophe.</li>
+            <li class="animated-item d-6">Si le chauffage n'est pas nécessaire, nous vous conseillons de le couper, de même que l'éclairage.</li>
+            <li class="animated-item d-6">**Évitez à tout prix les lampes chauffantes en céramique**, qui ont déjà causé des incendies en se décrochant.</li>
+        </ul>
+        <p class="animated-item d-6" style="margin-top: 40px;">
+            Enfin, sachez que si un départ est souvent un moment stressant pour l'éleveur, le risque reste minime pour un séjour de durée conventionnelle (1 ou 2 semaines), s'il est bien préparé.
+        </p>
+
+    </div>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-brand">
+            <h2>MYRMEX.</h2>
+            <p>Archive numérique dédiée à l'étude et à la préservation des données myrmécologiques mondiales. Projet Open Source.</p>
+        </div>
+        
+        <div class="footer-col">
+            <h4>Exploration</h4>
+            <a href="../index.html" class="footer-link" data-hover>Index des Espèces</a>
+            <a href="#" class="footer-link" data-hover>Carte Géographique</a>
+            <a href="#" class="footer-link" data-hover>Taxonomie</a>
+            <a href="#" class="footer-link" data-hover>Recherche Avancée</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Ressources</h4>
+            <a href="#" class="footer-link" data-hover>Documentation API</a>
+            <a href="#" class="footer-link" data-hover>Contribuer</a>
+            <a href="#" class="footer-link" data-hover>Mentions Légales</a>
+            <a href="#" class="footer-link" data-hover>Politique de Confidentialité</a>
+        </div>
+
+        <div class="footer-col">
+            <h4>Connexion</h4>
+            <a href="#" class="footer-link" data-hover>GitHub</a>
+            <a href="#" class="footer-link" data-hover>Twitter / X</a>
+            <a href="#" class="footer-link" data-hover>Discord Community</a>
+            <a href="#" class="footer-link" data-hover>Contact Support</a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <span>&copy; 2024 MYRMEX ARCHIVE. Tous droits réservés.</span>
+        <div class="sys-status">
+            <div class="status-dot"></div>
+            <span>SYSTEM STATUS: OPERATIONAL</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+  // 1. GESTION DU THÈME
+  const body = document.body;
+  const themeToggle = document.getElementById('theme-toggle');
+  const moonIcon = document.getElementById('moon-icon');
+  const sunIcon = document.getElementById('sun-icon');
+
+  function applyTheme(isLight) {
+    if (isLight) {
+      body.classList.add('light-mode');
+      themeToggle.setAttribute('data-active', 'true');
+      moonIcon.style.color = 'var(--text-secondary)'; 
+      sunIcon.style.color = 'var(--amber)'; 
+    } else {
+      body.classList.remove('light-mode');
+      themeToggle.setAttribute('data-active', 'false');
+      moonIcon.style.color = 'var(--amber)';
+      sunIcon.style.color = 'var(--text-secondary)'; 
+    }
+  }
+
+  const savedTheme = localStorage.getItem('theme');
+  const initialIsLightMode = savedTheme === 'light';
+  applyTheme(initialIsLightMode);
+
+  function toggleTheme() {
+    const isCurrentlyLight = body.classList.contains('light-mode');
+    if (isCurrentlyLight) {
+      applyTheme(false);
+      localStorage.setItem('theme', 'dark');
+    } else {
+      applyTheme(true);
+      localStorage.setItem('theme', 'light');
+    }
+  }
+
+  themeToggle.addEventListener('click', toggleTheme);
+
+
+  // 2. CURSEUR
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  
+  function refreshHoverListeners() {
+    document.querySelectorAll('[data-hover], a, .nav-item, .lang-selector, .social-icon, #theme-toggle').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+    });
+  }
+  refreshHoverListeners();
+
+  // 3. SCROLL TRIGGER (Observer)
+  const animatedElements = document.querySelectorAll('.animated-item');
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target); 
+      }
+    });
+  }, { threshold: 0.1 });
+
+  animatedElements.forEach(el => observer.observe(el));
+
+</script>
+
+</body>
+</html>
