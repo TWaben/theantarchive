@@ -375,9 +375,13 @@
     .animated-item.is-visible { animation: fadeIn 0.8s ease forwards; }
     .d-1 { animation-delay: 0.1s; } .d-2 { animation-delay: 0.2s; } .d-3 { animation-delay: 0.3s; }
     .d-4 { animation-delay: 0.4s; } .d-5 { animation-delay: 0.5s; } .d-6 { animation-delay: 0.6s; }
-    /* Nouveaux délais pour la fiche d'élevage */
-    .d-7 { animation-delay: 0.7s; } .d-8 { animation-delay: 0.8s; } .d-9 { animation-delay: 0.9s; }
+    /* Nouveaux délais pour la suite */
+    .d-7 { animation-delay: 0.7s; } 
+    .d-8 { animation-delay: 0.8s; } 
+    .d-9 { animation-delay: 0.9s; }
     .d-10 { animation-delay: 1.0s; }
+    .d-11 { animation-delay: 1.1s; }
+    .d-12 { animation-delay: 1.2s; }
 
     /* RESPONSIVE */
     /* Suppression de la media query pour 1200px pour maximiser l'espace pour 3 colonnes */
@@ -523,17 +527,27 @@
 
 <h2 class="sub-heading animated-item d-6">Écologie & Comportement</h2>
 <p class="animated-item d-6">
-    Originaire des forêts tropicales humides, la Bullet Ant se trouve du Nicaragua jusqu'au Paraguay. Elle est principalement terrestre et construit ses nids dans le sol, souvent à la base d'arbres ou sous des souches. La colonie est relativement petite pour une fourmi de cette taille, atteignant environ 2000 individus. Les ouvrières sont des chasseuses généralistes, se nourrissant d'arthropodes et de nectars végétaux. Elles sont célèbres pour les **colonnes de pillage** (raids) qu'elles forment pour ramener de grandes proies au nid.
+    Originaire des forêts tropicales humides, la Bullet Ant se trouve du Nicaragua jusqu'au Paraguay. Elle est principalement terrestre et construit ses nids dans le sol, souvent à la base d'arbres ou sous des souches. La colonie est relativement petite pour une fourmi de cette taille, atteignant environ 2000 individus. Les ouvrières sont des chasseuses généralistes, se nourrissant d'arthropodes et de nectars végétaux. Elles sont célèbres pour les colonnes de pillage (raids) qu'elles forment pour ramener de grandes proies au nid.
 </p>
 
-    <h2 class="sub-heading animated-item d-7">Fiche d'Élevage : Consignes Essentielles</h2>
-    <div style="border-top: 3px solid var(--amber); margin: 20px auto 40px auto; max-width: 900px; padding: 0;"></div>
+    <h2 class="sub-heading animated-item d-7">Reproduction & Cycle de Vie</h2>
     <p class="animated-item d-7">
-        L'élevage de Paraponera clavata est **réservé aux myrmécologues expérimentés** en raison de la toxicité de sa piqûre (Ponératoxine de niveau 4.0+ sur l'indice Schmidt). Des précautions de sécurité strictes doivent être observées.
+        Les vols nuptiaux de Paraponera clavata sont étroitement liés aux cycles pluviométriques tropicaux. Après l'accouplement, la reine désailée fonde sa colonie de manière semi-claustrale. Le cycle de développement est particulièrement lent pour cette espèce, nécessitant des conditions stables pour la réussite du couvain.
+    </p>
+    <div class="taxonomy-grid animated-item d-7" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="stat-box" data-hover><span class="label">Œuf</span><div class="value" style="font-size:16px">~30 Jours</div></div>
+        <div class="stat-box" data-hover><span class="label">Larve</span><div class="value" style="font-size:16px">~30 Jours</div></div>
+        <div class="stat-box" data-hover><span class="label">Nymphe</span><div class="value" style="font-size:16px">~30 Jours</div></div>
+        <div class="stat-box" data-hover><span class="label">Total</span><div class="value" style="font-size:16px">~3 Mois</div></div>
+    </div>
+    <h2 class="sub-heading animated-item d-8">Fiche d'Élevage : Consignes Essentielles</h2>
+    <div style="border-top: 3px solid var(--amber); margin: 20px auto 40px auto; max-width: 900px; padding: 0;"></div>
+    <p class="animated-item d-8">
+        L'élevage de Paraponera clavata est réservé aux myrmécologues expérimentés en raison de la toxicité de sa piqûre (Ponératoxine de niveau 4.0+ sur l'indice Schmidt). Des précautions de sécurité strictes doivent être observées.
     </p>
 
-    <h3 class="sub-heading animated-item d-8" style="font-size:20px; border:none; margin-top:20px;">Conditions de Maintien</h3>
-    <div class="taxonomy-grid animated-item d-8">
+    <h3 class="sub-heading animated-item d-9" style="font-size:20px; border:none; margin-top:20px;">Conditions de Maintien</h3>
+    <div class="taxonomy-grid animated-item d-9">
         <div class="stat-box" data-hover><span class="label">Température</span><div class="value" style="font-size:16px">24°C - 27°C</div></div>
         <div class="stat-box" data-hover><span class="label">Humidité (Nid)</span><div class="value" style="font-size:16px">70% - 85%</div></div>
         <div class="stat-box" data-hover><span class="label">Diète</span><div class="value" style="font-size:16px">Insectes, Miellat/Sucre</div></div>
@@ -543,16 +557,16 @@
         <div class="stat-box" data-hover><span class="label">Fondation</span><div class="value" style="font-size:16px">Semi-claustrale</div></div>
     </div>
 
-    <h3 class="sub-heading animated-item d-9" style="font-size:20px; border:none; margin-top:20px;">Spécificités d'Élevage</h3>
-    <p class="animated-item d-9">
-        Paraponera exige un environnement qui reproduit fidèlement la forêt tropicale humide. Un grand terrarium avec un substrat de sol forestier et une haute humidité est essentiel. La reine est difficile à démarrer en captivité et la fondation est semi-claustrale. Les fourmis ne doivent **jamais** être manipulées sans gants de protection appropriés et pinces très longues. Le nid doit avoir un système d'humidification constant.
+    <h3 class="sub-heading animated-item d-10" style="font-size:20px; border:none; margin-top:20px;">Spécificités d'Élevage</h3>
+    <p class="animated-item d-10">
+        Paraponera exige un environnement qui reproduit fidèlement la forêt tropicale humide. Un grand terrarium avec un substrat de sol forestier et une haute humidité est essentiel. La reine est difficile à démarrer en captivité et la fondation est semi-claustrale. Les fourmis ne doivent jamais être manipulées sans gants de protection appropriés et pinces très longues. Le nid doit avoir un système d'humidification constant.
     </p>
     
-    <h3 class="sub-heading animated-item d-10" style="font-size:20px; border:none; margin-top:20px;">Alimentation & Hydratation</h3>
-    <p class="animated-item d-10">
+    <h3 class="sub-heading animated-item d-11" style="font-size:20px; border:none; margin-top:20px;">Alimentation & Hydratation</h3>
+    <p class="animated-item d-11">
         Paraponera clavata est une espèce omnivore avec un fort besoin en protéines.
     </p>
-    <ul class="animated-item d-10">
+    <ul class="animated-item d-11">
         <li><b>Protéines :</b> Privilégiez les insectes de taille appropriée (blattes, grillons, mouches) tués et coupés en morceaux pour les ouvrières. Pour les fondations semi-claustrales, une petite proie coupée est essentielle pour la reine.</li>
         <li><b>Hydrates de carbone :</b> Le miellat (ou substituts sucrés non acides comme le sirop de riz) doit être proposé régulièrement. Les fourmis adultes consomment principalement des liquides sucrés.</li>
         <li><b>Eau :</b> Un accès constant à l'eau est crucial, généralement via une réserve d'eau ou un abreuvoir éponge dans l'aire de chasse et une zone du nid toujours humide.</li>
