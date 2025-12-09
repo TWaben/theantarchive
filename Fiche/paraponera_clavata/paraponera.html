@@ -337,17 +337,70 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-
-      .nav-center,
-      .nav-right {
-        display: none;
+      nav {
+        flex-wrap: wrap;
+        padding: 12px 20px;
+        justify-content: center;
+        position: relative;
+        position: sticky;
+        top: 0;
+        z-index: 999;
       }
 
-      nav::after {
-        content: 'MENU ///';
-        color: var(--accent);
-        font-size: 14px;
-        letter-spacing: 2px;
+      .nav-left {
+        order: 1;
+        width: auto;
+      }
+
+      .logo {
+        font-size: 18px;
+        margin-right: 15px;
+      }
+
+      .nav-center {
+        display: flex;
+        gap: 12px;
+        order: 2;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 12px;
+      }
+
+      .nav-item {
+        font-size: 12px;
+        padding: 5px 0;
+      }
+
+      .nav-right {
+        display: flex;
+        gap: 10px;
+        position: absolute;
+        right: 20px;
+        top: 12px;
+        width: auto;
+        margin: 0;
+        align-items: center;
+      }
+
+      .toggle-group {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        margin-right: 0 !important;
+        position: fixed !important;
+        left: 20px !important;
+        top: 12px !important;
+        width: auto !important;
+        z-index: 1000 !important;
+      }
+
+      .social-icon {
+        font-size: 12px;
+      }
+
+      .lang-selector {
+        font-size: 10px;
+        padding: 4px 8px;
       }
 
       .span-2 {
@@ -517,105 +570,8 @@
       box-shadow: none;
     }
 
-    /* === MAP MODAL STYLES === */
-    .map-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(8px);
-      z-index: 2000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
 
-    .map-modal.active {
-      opacity: 1;
-      pointer-events: all;
-    }
 
-    .map-content {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      padding: 30px;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 800px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-      transform: scale(0.9);
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      position: relative;
-    }
-
-    .map-modal.active .map-content {
-      transform: scale(1);
-    }
-
-    .map-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 15px;
-    }
-
-    .map-header h3 {
-      font-family: 'Lora';
-      color: var(--accent);
-      margin: 0;
-      font-size: 20px;
-      letter-spacing: 1px;
-    }
-
-    .close-map {
-      font-size: 28px;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: 0.3s;
-      line-height: 1;
-    }
-
-    .close-map:hover {
-      color: var(--accent);
-    }
-
-    .map-visual {
-      background: var(--bar-bg);
-      /* Dark ocean color */
-      border-radius: 4px;
-      padding: 20px;
-      border: 1px solid var(--border);
-      text-align: center;
-    }
-
-    .world-map-svg {
-      width: 100%;
-      height: auto;
-      max-height: 400px;
-      display: block;
-      margin: 0 auto;
-    }
-
-    .map-caption {
-      margin-top: 15px;
-      font-family: 'JetBrains Mono';
-      font-size: 12px;
-      color: var(--text-secondary);
-    }
-
-    .light-mode .map-visual {
-      background: #d0e0ff;
-      /* Light blue ocean */
-    }
-
-    /* --- END MAP MODAL --- */
     .details-section {
       position: relative;
       overflow: hidden;
@@ -899,33 +855,33 @@
         gap: 40px;
       }
     }
-	/* ✅ SECTION DISTRIBUTION - TAILLE MAÎTRISÉE */
-.distribution-section {
-  max-width: 1000px;
-  margin: 0 auto 80px auto;
-  padding: 0 20px;
-}
 
-.map-visual {
-  background: #d0e0ff;
-  border-radius: 10px;
-  padding: 16px;
-  border: 1px solid rgba(0,0,0,0.1);
-}
+    /* ✅ SECTION DISTRIBUTION - TAILLE MAÎTRISÉE */
+    .distribution-section {
+      max-width: 1000px;
+      margin: 0 auto 80px auto;
+      padding: 0 20px;
+    }
 
-.world-map-svg {
-  width: 100%;
-  max-width: 900px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
+    .map-visual {
+      background: #d0e0ff;
+      border-radius: 10px;
+      padding: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
 
-.map-caption {
-  text-align: center;
-  font-size: 12px;
-}
+    .world-map-svg {
+      width: 100%;
+      max-width: 900px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
 
+    .map-caption {
+      text-align: center;
+      font-size: 12px;
+    }
   </style>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
@@ -974,9 +930,8 @@
         <i class="fas fa-sun" id="sun-icon"></i>
       </div>
 
-      <a href="#" class="social-icon" data-hover>IG</a>
-      <a href="#" class="social-icon" data-hover>DC</a>
-      <a href="#" class="social-icon" data-hover>YT</a>
+      <a href="#" class="social-icon" data-hover><i class="fas fa-envelope"></i></a>
+      <a href="#" class="social-icon" data-hover><i class="fab fa-tiktok"></i></a>
 
       <div class="lang-selector" data-hover>
         🇫🇷 FR ▾
@@ -1015,7 +970,7 @@
           <span class="label">Reine</span>
           <div class="value">30<span>mm</span></div>
         </div>
-        <div class="stat-box" id="habitat-trigger" data-hover style="cursor: pointer;">
+        <div class="stat-box" data-hover>
           <span class="label">Habitat</span>
           <div class="value" style="font-size:16px">Néotropique <i class="fa-solid fa-earth-americas"
               style="font-size:12px; margin-left:5px; color:var(--accent);"></i></div>
@@ -1043,27 +998,25 @@
   </div>
 
   <div class="details-section">
-  <canvas id="swarmSectionCanvas"></canvas>
+    <canvas id="swarmSectionCanvas"></canvas>
 
-  <!-- SECTION CARTE AVANT LA CLASSIFICATION -->
-  <section class="distribution-section animated-item d-4">
-    <h2 class="sub-heading" style="border:none; margin-bottom:20px;">
-      Distribution Néotropicale
-    </h2>
+    <!-- SECTION CARTE AVANT LA CLASSIFICATION -->
+    <section class="distribution-section animated-item d-4">
+      <h2 class="sub-heading" style="border:none; margin-bottom:20px;">
+        Distribution Néotropicale
+      </h2>
 
-    <div class="map-visual">
-      <img src="../../mapmonde/bulletant.svg"
-           alt="Carte de distribution néotrope"
-           class="world-map-svg">
-      <div class="map-caption">
-        Les zones en <span style="color:var(--accent)">orange</span> indiquent
-        la présence confirmée de <i>Paraponera clavata</i>.
+      <div class="map-visual">
+        <img src="../../mapmonde/bulletant.svg" alt="Carte de distribution néotrope" class="world-map-svg">
+        <div class="map-caption">
+          Les zones en <span style="color:var(--accent)">orange</span> indiquent
+          la présence confirmée de <i>Paraponera clavata</i>.
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ENSUITE SEULEMENT : CLASSIFICATION TAXONOMIQUE -->
-  <h2 class="sub-heading animated-item d-5">Classification Taxonomique</h2>
+    <!-- ENSUITE SEULEMENT : CLASSIFICATION TAXONOMIQUE -->
+    <h2 class="sub-heading animated-item d-5">Classification Taxonomique</h2>
 
     <p class="animated-item d-4">
       La Paraponera clavata est l'unique espèce au sein de son genre monotypique, Paraponera, ce qui souligne son statut
@@ -1225,24 +1178,7 @@
     </div>
   </footer>
 
-  <!-- MAP MODAL -->
-  <div id="map-modal" class="map-modal">
-    <div class="map-content">
-      <div class="map-header">
-        <h3>DISTRIBUTION NÉOTROPIQUE</h3>
-        <span class="close-map">&times;</span>
-      </div>
-      <div class="map-visual">
-        <!-- ICI on charge le fichier SVG externe -->
-        <img src="../../mapmonde/world.svg" alt="Carte de distribution néotrope"
-             class="world-map-svg">
-        <div class="map-caption">
-          Les zones en <span style="color:var(--accent)">Orange</span> indiquent la présence confirmée de
-          <i>Paraponera clavata</i>.
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <script>
     // 1. GESTION DU THÈME
@@ -1384,32 +1320,7 @@
       requestAnimationFrame(animate);
     }
 
-    // 5. MAP MODAL LOGIC
-    const mapModal = document.getElementById('map-modal');
-    const mapTrigger = document.getElementById('habitat-trigger');
-    const closeMap = document.querySelector('.close-map');
 
-    if (mapTrigger && mapModal) {
-      mapTrigger.addEventListener('click', () => {
-        mapModal.classList.add('active');
-      });
-
-      closeMap.addEventListener('click', () => {
-        mapModal.classList.remove('active');
-      });
-
-      mapModal.addEventListener('click', (e) => {
-        if (e.target === mapModal) {
-          mapModal.classList.remove('active');
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mapModal.classList.contains('active')) {
-          mapModal.classList.remove('active');
-        }
-      });
-    }
 
     init(); animate();
   </script>
