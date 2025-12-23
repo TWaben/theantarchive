@@ -883,6 +883,123 @@
       text-align: center;
       font-size: 12px;
     }
+	/* === SWITCH 3D / PHOTO === */
+/* === VIEW TOGGLE — APRÈS (SEGMENTED SLIDE) === */
+.view-toggle {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  width: 210px;
+  padding: 6px;
+  border-radius: 999px;
+
+  background: rgba(15, 12, 10, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(12px);
+}
+
+.light-mode .view-toggle {
+  background: rgba(245, 245, 240, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+}
+
+/* boutons */
+.view-chip {
+  position: relative;
+  z-index: 2;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 10px 12px;
+  border-radius: 999px;
+
+  font-family: 'JetBrains Mono';
+  font-size: 12px;
+  color: var(--text-secondary);
+  transition: 0.2s;
+}
+
+.view-chip:hover {
+  color: var(--text-main);
+}
+
+.view-chip.is-active {
+  color: var(--text-main);
+}
+
+/* highlight qui GLISSE */
+.view-highlight {
+  position: absolute;
+  inset: 6px;
+  width: calc(50% - 6px);
+  border-radius: 999px;
+  z-index: 1;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.16),
+    rgba(255, 255, 255, 0.06)
+  );
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+
+  transform: translateX(0%);
+  transition: transform 0.28s ease;
+}
+
+.light-mode .view-highlight {
+  background: linear-gradient(
+    180deg,
+    rgba(62, 39, 35, 0.12),
+    rgba(62, 39, 35, 0.06)
+  );
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.12),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+/* état PHOTO */
+.view-toggle[data-view="photo"] .view-highlight {
+  transform: translateX(100%);
+}
+
+
+/* === VISUELS === */
+.visual-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#ant-3d,
+.ant-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.4s ease;
+}
+
+.ant-photo {
+  opacity: 0;
+  pointer-events: none;
+}
+
   </style>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
@@ -943,15 +1060,53 @@
   <div class="container">
 
     <div class="visual-col">
-      <model-viewer src="../../model3d/paraponera_clavata1.glb" alt="Paraponera clavata 3D" auto-rotate camera-controls
-        environment-image="neutral" shadow-intensity="1"
-        style="width:100%; height:100%; background: #000; display: block;">
-      </model-viewer>
-      <div class="img-overlay">
-        <div style="font-family:'JetBrains Mono'; font-size:12px; color:var(--accent)">Vue bullet ant model 3D
-        </div>
-      </div>
+
+  <!-- SWITCH 3D / PHOTO -->
+  <div class="view-toggle" id="view-toggle">
+  <button class="view-chip" type="button" data-view-btn="3d">
+    <i class="fa-solid fa-cube"></i>
+    <span>3D</span>
+  </button>
+
+  <button class="view-chip is-active" type="button" data-view-btn="photo">
+    <i class="fa-solid fa-camera"></i>
+    <span>PHOTO</span>
+  </button>
+
+  <span class="view-highlight" aria-hidden="true"></span>
+</div>
+
+
+  <!-- CONTENEUR VISUEL -->
+  <div class="visual-wrapper">
+
+    <!-- MODELE 3D -->
+    <model-viewer
+      id="ant-3d"
+      src="../model3d/paraponera_clavata1.glb"
+      alt="Paraponera clavata 3D"
+      auto-rotate
+      camera-controls
+      environment-image="neutral"
+      shadow-intensity="1">
+    </model-viewer>
+
+    <!-- PHOTO -->
+    <img
+      id="ant-photo"
+      src="../photo/paraponera_clavata.jpeg"
+      alt="Paraponera clavata photo"
+      class="ant-photo" />
+
+  </div>
+
+  <div class="img-overlay">
+    <div style="font-family:'JetBrains Mono'; font-size:12px; color:var(--accent)">
+      Vue Bullet Ant
     </div>
+  </div>
+
+</div>
 
     <div class="data-col">
       <span class="label animated-item d-1">Nom Commun</span>
@@ -1121,20 +1276,57 @@
       appropriés et pinces très longues. Le nid doit avoir un système d'humidification constant.
     </p>
 
-    <h3 class="sub-heading animated-item d-11" style="font-size:20px; border:none; margin-top:20px;">Alimentation &amp;
-      Hydratation</h3>
-    <p class="animated-item d-11">
-      Paraponera clavata est une espèce omnivore avec un fort besoin en protéines.
-    </p>
-    <ul class="animated-item d-11">
-      <li><b>Protéines :</b> Privilégiez les insectes de taille appropriée (blattes, grillons, mouches) tués et coupés
-        en morceaux pour les ouvrières. Pour les fondations semi-claustrales, une petite proie coupée est essentielle
-        pour la reine.</li>
-      <li><b>Hydrates de carbone :</b> Le miellat (ou substituts sucrés non acides comme le sirop de riz) doit être
-        proposé régulièrement. Les fourmis adultes consomment principalement des liquides sucrés.</li>
-      <li><b>Eau :</b> Un accès constant à l'eau est crucial, généralement via une réserve d'eau ou un abreuvoir éponge
-        dans l'aire de chasse et une zone du nid toujours humide.</li>
-    </ul>
+    <h3 class="sub-heading animated-item d-11" style="font-size:20px; border:none; margin-top:20px;">
+  Alimentation &amp; Hydratation
+</h3>
+
+<p class="animated-item d-11">
+  <i>Paraponera clavata</i> est une espèce omnivore avec un besoin protéique élevé, surtout en présence de couvain.
+  Les adultes consomment majoritairement des liquides sucrés (énergie), tandis que les larves nécessitent des apports
+  réguliers en protéines. L’objectif est d’assurer : <b>sucres + protéines + eau</b>, avec une hygiène stricte
+  (risques de moisissures en milieu humide).
+</p>
+
+<div class="taxonomy-grid animated-item d-11" style="grid-template-columns: repeat(3, 1fr);">
+  <div class="stat-box" data-hover>
+    <span class="label">Sucres (base)</span>
+    <div class="value" style="font-size:16px;">2–3× / semaine</div>
+  </div>
+
+  <div class="stat-box" data-hover>
+    <span class="label">Protéines (couvain)</span>
+    <div class="value" style="font-size:16px;">2–4× / semaine</div>
+  </div>
+
+  <div class="stat-box" data-hover>
+    <span class="label">Hydratation</span>
+    <div class="value" style="font-size:16px;">Eau en continu</div>
+  </div>
+
+  <div class="stat-box" data-hover>
+    <span class="label">Type de proies</span>
+    <div class="value" style="font-size:16px;">Insectes “gros”</div>
+  </div>
+
+  <div class="stat-box" data-hover>
+    <span class="label">Fréquence ajustée</span>
+    <div class="value" style="font-size:16px;">Selon couvain</div>
+  </div>
+
+  <div class="stat-box" data-hover>
+    <span class="label">Nettoyage</span>
+    <div class="value" style="font-size:16px;">Restes à retirer</div>
+  </div>
+</div>
+
+<ul class="animated-item d-12">
+  <li><b>Sucres :</b> miellat / eau+miel / sirop neutre (éviter les liquides acides). Petites quantités, renouvelées souvent.</li>
+  <li><b>Protéines :</b> blattes, grillons, criquets, grosses mouches… idéalement <b>tués et coupés</b> (surtout pour la reine en fondation).</li>
+  <li><b>Hydratation :</b> abreuvoir éponge/coton dans l’ADC + <b>zone du nid toujours humide</b> (mais pas détrempée).</li>
+  <li><b>Hygiène :</b> en climat humide, retire les restes rapidement (24–48h max) pour limiter moisissures/acarien.</li>
+  <li><b>Astuce :</b> si la colonie a beaucoup de couvain, augmente les protéines (jusqu’à 3–4×/semaine), sinon reste sur 2×/semaine.</li>
+</ul>
+
   </div>
 
   <footer>
@@ -1198,8 +1390,12 @@
     }
 
     const savedTheme = localStorage.getItem('theme');
-    const initialIsLightMode = savedTheme === 'light';
-    applyTheme(initialIsLightMode);
+
+// 👉 clair par défaut si rien n'est stocké
+const initialIsLightMode = savedTheme === null || savedTheme === 'light';
+
+applyTheme(initialIsLightMode);
+
 
     function toggleTheme() {
       const isCurrentlyLight = body.classList.contains('light-mode');
@@ -1319,6 +1515,33 @@
 
 
     init(); animate();
+	const viewToggle = document.getElementById('view-toggle');
+const ant3D = document.getElementById('ant-3d');
+const antPhoto = document.getElementById('ant-photo');
+const viewBtns = document.querySelectorAll('[data-view-btn]');
+
+function setView(mode) {
+  viewToggle.setAttribute('data-view', mode);
+
+  const isPhoto = mode === 'photo';
+
+  ant3D.style.opacity = isPhoto ? '0' : '1';
+  ant3D.style.pointerEvents = isPhoto ? 'none' : 'auto';
+
+  antPhoto.style.opacity = isPhoto ? '1' : '0';
+  antPhoto.style.pointerEvents = isPhoto ? 'auto' : 'none';
+
+  viewBtns.forEach(btn => {
+    btn.classList.toggle('is-active', btn.dataset.viewBtn === mode);
+  });
+}
+
+viewBtns.forEach(btn => {
+  btn.addEventListener('click', () => setView(btn.dataset.viewBtn));
+});
+
+setView('photo');
+
   </script>
 
 </body>

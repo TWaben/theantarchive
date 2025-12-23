@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MYRMEX | Aphaenogaster senilis</title>
+  <title>MYRMEX | Atta cephalotes</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link
@@ -30,12 +30,10 @@
       --accent-glow: rgba(205, 133, 63, 0.3);
       --glass: rgba(255, 255, 255, 0.03);
       --border: rgba(141, 110, 99, 0.3);
-
       --pain-bg: rgba(141, 110, 99, 0.1);
       --pain-border: rgba(141, 110, 99, 0.3);
       --pain-text: #d7ccc8;
       --bar-bg: #2d241e;
-
       --footer-bg: #0f0c0a;
       --footer-text-main: #bcaaa4;
       --footer-text-link: #d7ccc8;
@@ -45,7 +43,7 @@
       --toggle-color-inactive: #4e342e;
       --toggle-knob: #e6e0d4;
 
-      /* NOUVEAU STYLE POUR NAV (index.html) */
+      /* NAV */
       --glass-nav: rgba(20, 16, 13, 0.9);
     }
 
@@ -57,7 +55,6 @@
       --accent-light: #e6b88a;
       --earth: #8b6f47;
 
-      /* EARTHY TEXT COLORS (Light Mode) */
       --text-main: #3e2723;
       --text-secondary: #5d4037;
       --text-label: #8d6e63;
@@ -66,22 +63,18 @@
       --accent-glow: rgba(205, 133, 63, 0.25);
       --glass: rgba(62, 39, 35, 0.03);
       --border: rgba(141, 110, 99, 0.3);
-
       --pain-bg: rgba(141, 110, 99, 0.05);
       --pain-border: rgba(141, 110, 99, 0.15);
       --pain-text: #3e2723;
       --bar-bg: #d7ccc8;
-
       --footer-bg: #f0f0e8;
       --footer-text-main: #5d4037;
       --footer-text-link: #3e2723;
 
-      /* Couleurs pour le Toggle Switch en mode clair */
       --toggle-color-active: #cd853f;
       --toggle-color-inactive: #d7ccc8;
       --toggle-knob: #3e2723;
 
-      /* NOUVEAU STYLE POUR NAV (index.html) */
       --glass-nav: rgba(245, 249, 245, 0.92);
     }
 
@@ -89,9 +82,7 @@
       background: #e8f0e8 !important;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -103,15 +94,10 @@
     }
 
     /* --- CURSEUR --- */
-    #cursor {
-      display: none;
-    }
+    #cursor { display: none; }
+    #cursor.hovered { display: none; }
 
-    #cursor.hovered {
-      display: none;
-    }
-
-    /* --- NAVIGATION --- */
+    /* --- NAV --- */
     nav {
       position: fixed;
       top: 0;
@@ -128,10 +114,7 @@
       mix-blend-mode: normal;
     }
 
-    .nav-left {
-      display: flex;
-      align-items: center;
-    }
+    .nav-left { display: flex; align-items: center; }
 
     .logo {
       font-family: 'Lora';
@@ -143,11 +126,7 @@
       text-decoration: none;
     }
 
-    .nav-center {
-      display: flex;
-      gap: 30px;
-      align-items: center;
-    }
+    .nav-center { display: flex; gap: 30px; align-items: center; }
 
     .nav-item {
       position: relative;
@@ -160,11 +139,8 @@
       padding: 10px 0;
     }
 
-    .nav-item:hover {
-      color: var(--accent);
-    }
+    .nav-item:hover { color: var(--accent); }
 
-    /* Dropdown */
     .dropdown-content {
       display: none;
       position: absolute;
@@ -173,7 +149,7 @@
       background-color: var(--bg);
       min-width: 260px;
       border: 1px solid var(--border);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       padding: 10px 0;
       border-radius: 4px;
       flex-direction: column;
@@ -234,12 +210,7 @@
       border-color: var(--accent);
     }
 
-    /* --- NAV RIGHT & TOGGLE --- */
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
 
     .social-icon {
       color: var(--text-main);
@@ -250,10 +221,7 @@
       font-family: 'Poppins';
     }
 
-    .social-icon:hover {
-      opacity: 1;
-      color: var(--accent);
-    }
+    .social-icon:hover { opacity: 1; color: var(--accent); }
 
     .lang-selector {
       border: 1px solid var(--text-secondary);
@@ -268,29 +236,13 @@
     }
 
     @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* === TOGGLE SWITCH STYLE === */
-    .toggle-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-right: 15px;
-    }
-
-    .toggle-group i {
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
+    /* === TOGGLE SWITCH === */
+    .toggle-group { display: flex; align-items: center; gap: 10px; margin-right: 15px; }
+    .toggle-group i { color: var(--text-secondary); font-size: 14px; }
 
     #theme-toggle {
       position: relative;
@@ -303,10 +255,7 @@
 
     .slider {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background-color: var(--toggle-color-inactive);
       border-radius: 24px;
       transition: 0.4s;
@@ -326,21 +275,14 @@
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     }
 
-    /* État ACTIF */
     .light-mode #theme-toggle[data-active="true"] .slider,
     #theme-toggle[data-active="true"] .slider {
       background-color: var(--toggle-color-active);
     }
 
-    #theme-toggle[data-active="true"] .knob {
-      transform: translateX(21px);
-    }
+    #theme-toggle[data-active="true"] .knob { transform: translateX(21px); }
+    .light-mode #theme-toggle[data-active="false"] .knob { background-color: #6a6a6a; }
 
-    .light-mode #theme-toggle[data-active="false"] .knob {
-      background-color: #6a6a6a;
-    }
-
-    /* RESPONSIVE NAV */
     @media (max-width: 900px) {
       nav {
         flex-wrap: wrap;
@@ -352,15 +294,8 @@
         z-index: 999;
       }
 
-      .nav-left {
-        order: 1;
-        width: auto;
-      }
-
-      .logo {
-        font-size: 18px;
-        margin-right: 15px;
-      }
+      .nav-left { order: 1; width: auto; }
+      .logo { font-size: 18px; margin-right: 15px; }
 
       .nav-center {
         display: flex;
@@ -371,10 +306,7 @@
         margin-top: 12px;
       }
 
-      .nav-item {
-        font-size: 12px;
-        padding: 5px 0;
-      }
+      .nav-item { font-size: 12px; padding: 5px 0; }
 
       .nav-right {
         display: flex;
@@ -399,19 +331,13 @@
         z-index: 1000 !important;
       }
 
-      .social-icon {
-        font-size: 12px;
-      }
-
-      .lang-selector {
-        font-size: 10px;
-        padding: 4px 8px;
-      }
-
-      .span-2 {
-        grid-column: span 1;
-      }
+      .social-icon { font-size: 12px; }
+      .lang-selector { font-size: 10px; padding: 4px 8px; }
+      .span-2 { grid-column: span 1; }
     }
+
+    .light-mode .knob { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
+    .light-mode #theme-toggle[data-active="true"] .slider { background-color: var(--toggle-color-active); }
 
     .container {
       display: grid;
@@ -445,8 +371,7 @@
 
     .img-overlay {
       position: absolute;
-      bottom: 0;
-      left: 0;
+      bottom: 0; left: 0;
       width: 100%;
       padding: 40px;
       background: linear-gradient(to top, var(--bg), transparent);
@@ -518,7 +443,7 @@
       margin-left: 4px;
     }
 
-    /* SCHMIDT INDEX */
+    /* "PAIN" SECTION (adaptée ici en "morsure") */
     .pain-section {
       margin-top: 40px;
       border-top: 1px solid var(--border);
@@ -559,9 +484,7 @@
       font-size: 13px;
     }
 
-    .light-mode .pain-bar-fill {
-      box-shadow: none;
-    }
+    .light-mode .pain-bar-fill { box-shadow: none; }
 
     .details-section {
       position: relative;
@@ -576,8 +499,7 @@
 
     #swarmSectionCanvas {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
       z-index: 0;
@@ -692,65 +614,12 @@
       transform: translateX(5px);
     }
 
-    .footer-bottom {
-      border-top: 1px solid var(--border);
-      padding-top: 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: 'JetBrains Mono';
-      font-size: 11px;
-      color: var(--footer-text-main);
-      max-width: 1400px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .sys-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .status-dot {
-      width: 6px;
-      height: 6px;
-      background: #2ecc71;
-      border-radius: 50%;
-      box-shadow: 0 0 5px #2ecc71;
-    }
-
     /* ANIMATIONS */
-    @keyframes fillBar {
-      from {
-        width: 0;
-      }
+    @keyframes fillBar { from { width: 0; } to { width: 25%; } } /* faible */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-      to {
-        width: 100%;
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .animated-item {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    .animated-item.is-visible {
-      animation: fadeIn 0.8s ease forwards;
-    }
+    .animated-item { opacity: 0; transform: translateY(20px); }
+    .animated-item.is-visible { animation: fadeIn 0.8s ease forwards; }
 
     .d-1 { animation-delay: 0.1s; }
     .d-2 { animation-delay: 0.2s; }
@@ -765,49 +634,18 @@
     .d-11 { animation-delay: 1.1s; }
     .d-12 { animation-delay: 1.2s; }
 
-    /* RESPONSIVE PAGE */
     @media (max-width: 900px) {
-      .container {
-        grid-template-columns: 1fr;
-        height: auto;
-      }
-
-      .visual-col {
-        height: 50vh;
-        border-right: none;
-      }
-
-      .data-col {
-        padding: 40px 20px;
-      }
-
-      h1 {
-        font-size: 50px;
-      }
-
-      .details-section,
-      footer {
-        padding: 40px 20px;
-        margin-top: 0;
-      }
-
-      .taxonomy-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .details-section p,
-      .sub-heading,
-      .details-section ul {
-        max-width: 100%;
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
+      .container { grid-template-columns: 1fr; height: auto; }
+      .visual-col { height: 50vh; border-right: none; }
+      .data-col { padding: 40px 20px; }
+      h1 { font-size: 50px; }
+      .details-section, footer { padding: 40px 20px; margin-top: 0; }
+      .taxonomy-grid { grid-template-columns: 1fr; }
+      .details-section p, .sub-heading, .details-section ul { max-width: 100%; }
+      .footer-content { grid-template-columns: 1fr; gap: 40px; }
     }
 
-    /* ✅ SECTION DISTRIBUTION */
+    /* DISTRIBUTION */
     .distribution-section {
       max-width: 1000px;
       margin: 0 auto 80px auto;
@@ -834,7 +672,7 @@
       font-size: 12px;
     }
 
-    /* === VIEW TOGGLE — SEGMENTED SLIDE === */
+    /* === VIEW TOGGLE (3D/PHOTO) === */
     .view-toggle {
       position: absolute;
       top: 100px;
@@ -891,9 +729,7 @@
       z-index: 1;
 
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
-      box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.35),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.10);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.10);
 
       transform: translateX(0%);
       transition: transform 0.28s ease;
@@ -901,23 +737,14 @@
 
     .light-mode .view-highlight {
       background: linear-gradient(180deg, rgba(62, 39, 35, 0.12), rgba(62, 39, 35, 0.06));
-      box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.12),
-        inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(0, 0, 0, 0.08);
     }
 
-    .view-toggle[data-view="photo"] .view-highlight {
-      transform: translateX(100%);
-    }
+    .view-toggle[data-view="photo"] .view-highlight { transform: translateX(100%); }
 
-    .visual-wrapper {
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
+    .visual-wrapper { width: 100%; height: 100%; position: relative; }
 
-    #ant-3d,
-    .ant-photo {
+    #ant-3d, .ant-photo {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -926,10 +753,7 @@
       transition: opacity 0.4s ease;
     }
 
-    .ant-photo {
-      opacity: 0;
-      pointer-events: none;
-    }
+    .ant-photo { opacity: 0; pointer-events: none; }
   </style>
 
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
@@ -989,188 +813,159 @@
   </nav>
 
   <div class="container">
-
     <div class="visual-col">
 
       <!-- SWITCH 3D / PHOTO -->
       <div class="view-toggle" id="view-toggle">
         <button class="view-chip" type="button" data-view-btn="3d">
-          <i class="fa-solid fa-cube"></i>
-          <span>3D</span>
+          <i class="fa-solid fa-cube"></i><span>3D</span>
         </button>
-
         <button class="view-chip is-active" type="button" data-view-btn="photo">
-          <i class="fa-solid fa-camera"></i>
-          <span>PHOTO</span>
+          <i class="fa-solid fa-camera"></i><span>PHOTO</span>
         </button>
-
         <span class="view-highlight" aria-hidden="true"></span>
       </div>
 
       <!-- CONTENEUR VISUEL -->
       <div class="visual-wrapper">
-
-        <!-- MODELE 3D -->
-        <!-- ⚠️ Remplace le nom de fichier si besoin : ../model3d/aphaenogaster_senilis.glb -->
-        <model-viewer id="ant-3d" src="../model3d/aphaenogaster_senilis.glb" alt="Aphaenogaster senilis 3D"
-          auto-rotate camera-controls environment-image="neutral" shadow-intensity="1">
+        <model-viewer id="ant-3d"
+          src="../model3d/leafcutter.glb"
+          alt="Atta cephalotes 3D"
+          auto-rotate camera-controls
+          environment-image="neutral"
+          shadow-intensity="1">
         </model-viewer>
 
-        <!-- PHOTO -->
-        <!-- ⚠️ Remplace le nom de fichier si besoin : ../photo/aphaenogaster_senilis.jpeg -->
-        <img id="ant-photo" src="../photo/Aphaenogastersenilis.png" alt="Aphaenogaster senilis photo"
+        <img id="ant-photo"
+          src="../photo/leafcutter.avif"
+          alt="Atta cephalotes photo"
           class="ant-photo" />
       </div>
 
       <div class="img-overlay">
         <div style="font-family:'JetBrains Mono'; font-size:12px; color:var(--accent)">
-          Vue Aphaenogaster
+          Vue Leafcutter
         </div>
       </div>
-
     </div>
 
     <div class="data-col">
       <span class="label animated-item d-1">Nom Commun</span>
-      <h1 class="animated-item d-1">APHAENOGASTER</h1>
-      <span class="scientific-name animated-item d-1">Aphaenogaster senilis</span>
+      <h1 class="animated-item d-1">LEAFCUTTER</h1>
+      <span class="scientific-name animated-item d-1">Atta cephalotes</span>
 
       <p class="animated-item d-2">
-        Espèce méditerranéenne très active, typique des zones sèches (garrigues, maquis). Connue pour ses nids complexes
-        et sa collecte de graines (myrmécochorie), elle joue un rôle important dans la dispersion des plantes.
+        Célèbre pour ses colonnes de coupe et de transport de feuilles, cette fourmi ne “mange” pas directement les feuilles :
+        elle les utilise pour cultiver un <b>champignon symbiotique</b> qui nourrit la colonie. Une super-espèce d’ingénierie
+        écologique, capable de bâtir des nids massifs et de maintenir une agriculture fongique complexe.
       </p>
 
       <div class="stats-grid animated-item d-2">
         <div class="stat-box" data-hover>
           <span class="label">Taille Moyenne</span>
-          <div class="value">7<span>mm</span></div>
+          <div class="value">8–12<span>mm</span></div>
         </div>
         <div class="stat-box" data-hover>
           <span class="label">Reine</span>
-          <div class="value">10<span>mm</span></div>
+          <div class="value">25–30<span>mm</span></div>
         </div>
         <div class="stat-box" data-hover>
           <span class="label">Habitat</span>
-          <div class="value" style="font-size:16px">Méditerranéen
-            <i class="fa-solid fa-earth-europe" style="font-size:12px; margin-left:5px; color:var(--accent);"></i>
-          </div>
+          <div class="value" style="font-size:16px">Néotropique <i class="fa-solid fa-earth-americas"
+              style="font-size:12px; margin-left:5px; color:var(--accent);"></i></div>
         </div>
         <div class="stat-box" data-hover>
           <span class="label">Colonie</span>
-          <div class="value">~1500<span>inds</span></div>
+          <div class="value">10⁵–10⁶<span>inds</span></div>
         </div>
       </div>
 
       <div class="pain-section animated-item d-3">
         <div class="pain-header">
-          <span style="font-family:'Lora'; font-size:20px;">Index de Douleur (référence)</span>
+          <span style="font-family:'Playfair Display'; font-size:20px;">Index de Douleur (référence)</span>
           <span style="color:var(--accent-light); font-weight:bold;">FAIBLE (≈ 1.0)</span>
         </div>
-
         <div class="pain-bar-container">
-          <!-- On garde le style, mais on remplit moins “visuellement” via une largeur inline -->
-          <div class="pain-bar-fill" style="animation:none; width:25%;"></div>
+          <div class="pain-bar-fill"></div>
         </div>
-
         <div class="warning-box">
           <span style="font-size:20px">ℹ️</span>
-          <div><b>PIQÛRE</b><br>Généralement peu marquante chez l’humain. Risques surtout en cas d’allergie, comme pour
-            toute piqûre d’hyménoptère.</div>
+          <div><b>MORSURE / DÉFENSE</b><br>Peut mordre fort et pincer. Manipulation prudente, surtout avec les grosses castes.</div>
         </div>
       </div>
-    </div>
 
+    </div>
   </div>
 
   <div class="details-section">
     <canvas id="swarmSectionCanvas"></canvas>
 
-    <!-- SECTION CARTE AVANT LA CLASSIFICATION -->
+    <!-- DISTRIBUTION -->
     <section class="distribution-section animated-item d-4">
       <h2 class="sub-heading" style="border:none; margin-bottom:20px;">
-        Distribution Méditerranéenne
+        Distribution Néotropicale
       </h2>
 
       <div class="map-visual">
-        <img src="../mapmonde/aphaenogaster.svg" alt="Carte de distribution méditerranéenne"
-          class="world-map-svg">
+        <img src="../mapmonde/leafcutter.svg" alt="Carte de distribution néotrope" class="world-map-svg">
         <div class="map-caption">
-          Les zones en <span style="color:var(--accent)">orange</span> indiquent la présence confirmée de
-          <i>Aphaenogaster senilis</i>.
+          Les zones en <span style="color:var(--accent)">orange</span> indiquent
+          la présence typique des fourmis coupeuses de feuilles (<i>Atta</i> / <i>Acromyrmex</i>) — ici : <i>Atta cephalotes</i>.
         </div>
       </div>
     </section>
 
+    <!-- TAXONOMIE -->
     <h2 class="sub-heading animated-item d-5">Classification Taxonomique</h2>
-
     <p class="animated-item d-4">
-      <i>Aphaenogaster senilis</i> appartient à la sous-famille des Myrmicinae. C’est une espèce bien adaptée aux climats
-      chauds et secs, avec une forte activité de prospection.
+      <i>Atta cephalotes</i> appartient à la sous-famille des Myrmicinae. Elle fait partie des “leafcutters”,
+      un groupe spécialisé dans la culture d’un champignon symbiotique à partir de fragments végétaux.
     </p>
 
     <div class="taxonomy-grid animated-item d-4">
-      <div class="stat-box" data-hover><span class="label">Règne</span>
-        <div class="value" style="font-size:16px">Animalia</div>
-      </div>
-      <div class="stat-box" data-hover><span class="label">Embranchement</span>
-        <div class="value" style="font-size:16px">Arthropoda</div>
-      </div>
-      <div class="stat-box" data-hover><span class="label">Classe</span>
-        <div class="value" style="font-size:16px">Insecta</div>
-      </div>
-      <div class="stat-box" data-hover><span class="label">Ordre</span>
-        <div class="value" style="font-size:16px">Hymenoptera</div>
-      </div>
-      <div class="stat-box" data-hover><span class="label">Famille</span>
-        <div class="value" style="font-size:16px">Formicidae</div>
-      </div>
-      <div class="stat-box" data-hover><span class="label">Sous-Famille</span>
-        <div class="value" style="font-size:16px">Myrmicinae</div>
-      </div>
+      <div class="stat-box" data-hover><span class="label">Règne</span><div class="value" style="font-size:16px">Animalia</div></div>
+      <div class="stat-box" data-hover><span class="label">Embranchement</span><div class="value" style="font-size:16px">Arthropoda</div></div>
+      <div class="stat-box" data-hover><span class="label">Classe</span><div class="value" style="font-size:16px">Insecta</div></div>
+      <div class="stat-box" data-hover><span class="label">Ordre</span><div class="value" style="font-size:16px">Hymenoptera</div></div>
+      <div class="stat-box" data-hover><span class="label">Famille</span><div class="value" style="font-size:16px">Formicidae</div></div>
+      <div class="stat-box" data-hover><span class="label">Sous-Famille</span><div class="value" style="font-size:16px">Myrmicinae</div></div>
     </div>
 
     <h2 class="sub-heading animated-item d-5">Morphologie et Identification</h2>
     <p class="animated-item d-5">
-      L’ouvrière d’<i>Aphaenogaster senilis</i> est élancée, avec de longues pattes et de longues antennes. La coloration
-      va souvent de l’ocre au roussâtre. On observe des épines sur le thorax (profil “armé”), et une silhouette très
-      “coureuse” caractéristique des espèces de garrigue.
+      Les colonies présentent un fort <b>polymorphisme</b> : petites ouvrières jardinières, ouvrières coupeuses,
+      et grosses castes (majors) dédiées à la défense. Le corps est robuste, avec des mandibules puissantes adaptées
+      au découpage des feuilles. Les pistes de transport sont souvent très visibles sur le terrain.
     </p>
 
     <h2 class="sub-heading animated-item d-6">Écologie & Comportement</h2>
     <p class="animated-item d-6">
-      Espèce commune du bassin méditerranéen (Péninsule Ibérique, Afrique du Nord, sud de la France). Elle installe ses
-      nids dans le sol, sous pierres ou à l’abri de la végétation. Très active, elle combine prédation opportuniste,
-      charognage et collecte de graines ; elle participe à la dispersion de certaines plantes via la myrmécochorie.
+      Espèce emblématique des écosystèmes tropicaux d’Amérique. Les ouvrières récoltent des fragments végétaux
+      (feuilles, pétales, herbacées), non pour les consommer directement, mais pour <b>nourrir un champignon</b>
+      cultivé dans le nid. Ce système agricole implique une logistique impressionnante : routes, stockage,
+      tri et hygiène (évacuation des déchets).
     </p>
 
     <h2 class="sub-heading animated-item d-7">Reproduction & Cycle de Vie</h2>
     <p class="animated-item d-7">
-      Les essaimages surviennent généralement lors de périodes favorables (températures douces + humidité après pluie).
-      La fondation est souvent claustrale ou semi-claustrale selon les conditions. Comme beaucoup d’espèces
-      méditerranéennes, l’activité ralentit en hiver.
+      La reine fonde sa colonie en emportant un <b>inoculum fongique</b> (un “morceau” du champignon) après le vol nuptial.
+      Les premières ouvrières sont élevées pour lancer la culture et sécuriser l’approvisionnement. Avec le temps,
+      la colonie peut atteindre une taille gigantesque.
     </p>
 
     <div class="taxonomy-grid animated-item d-7" style="grid-template-columns: repeat(4, 1fr);">
-      <div class="stat-box" data-hover><span class="label">Œuf</span>
-        <div class="value" style="font-size:16px">~10–20 jours</div>
-      </div>
-      <div class="stat-box" data-hover><span class="label">Larve</span>
-        <div class="value" style="font-size:16px">~10–20 jours</div>
-      </div>
-      <div class="stat-box" data-hover><span class="label">Nymphe</span>
-        <div class="value" style="font-size:16px">~15–30 jours</div>
-      </div>
-      <div class="stat-box" data-hover><span class="label">Total</span>
-        <div class="value" style="font-size:16px">~1–2 mois</div>
-      </div>
+      <div class="stat-box" data-hover><span class="label">Œuf</span><div class="value" style="font-size:16px">~10–20 Jours</div></div>
+      <div class="stat-box" data-hover><span class="label">Larve</span><div class="value" style="font-size:16px">~15–30 Jours</div></div>
+      <div class="stat-box" data-hover><span class="label">Nymphe</span><div class="value" style="font-size:16px">~15–30 Jours</div></div>
+      <div class="stat-box" data-hover><span class="label">Total</span><div class="value" style="font-size:16px">~1.5–3 Mois</div></div>
     </div>
 
     <h2 class="sub-heading animated-item d-8">Fiche d'Élevage : Consignes Essentielles</h2>
     <div style="border-top: 3px solid var(--accent); margin: 20px auto 40px auto; max-width: 900px; padding: 0;"></div>
-
     <p class="animated-item d-8">
-      Espèce intéressante pour l’élevage “méditerranéen” : robuste, très active et bonne exploratrice.
-      L’important est de respecter une période de repos (diapause légère) et de proposer un nid sec à zone humidifiée.
+      L’élevage de <i>Atta cephalotes</i> est l’un des plus exigeants : il faut gérer <b>le champignon</b>,
+      l’hygiène, une alimentation végétale variée, et un système anti-moisissures/parasites.
+      Recommandé aux éleveurs expérimentés, avec une installation dédiée.
     </p>
 
     <h3 class="sub-heading animated-item d-9" style="font-size:20px; border:none; margin-top:20px;">
@@ -1178,85 +973,75 @@
     </h3>
 
     <div class="taxonomy-grid animated-item d-9">
-      <div class="stat-box" data-hover><span class="label">Température</span>
-        <div class="value" style="font-size:16px">22°C – 26°C</div>
-      </div>
-      <div class="stat-box" data-hover><span class="label">Humidité (Nid)</span>
-        <div class="value" style="font-size:16px">Zone humide + zone sèche</div>
-      </div>
-      <div class="stat-box" data-hover><span class="label">Diète</span>
-        <div class="value" style="font-size:16px">Sucre + Insectes</div>
-      </div>
-      <div class="stat-box" data-hover><span class="label">Diapause</span>
-        <div class="value" style="font-size:16px">Oui (10–15°C, 2–3 mois)</div>
-      </div>
-      <div class="stat-box" data-hover><span class="label">Type de Nid</span>
-        <div class="value" style="font-size:16px">Ytong / plâtre / tube</div>
-      </div>
-      <div class="stat-box" data-hover><span class="label">Fondation</span>
-        <div class="value" style="font-size:16px">Claustrale / semi-claustrale</div>
-      </div>
+      <div class="stat-box" data-hover><span class="label">Température</span><div class="value" style="font-size:16px">24°C - 27°C</div></div>
+      <div class="stat-box" data-hover><span class="label">Humidité (chambre fongique)</span><div class="value" style="font-size:16px">75% - 90%</div></div>
+      <div class="stat-box" data-hover><span class="label">Diète</span><div class="value" style="font-size:16px">Feuilles + sucres (compl.)</div></div>
+
+      <div class="stat-box" data-hover><span class="label">Diapause</span><div class="value" style="font-size:16px">Absente / Non nécessaire</div></div>
+      <div class="stat-box" data-hover><span class="label">Type de Nid</span><div class="value" style="font-size:16px">Multi-chambres + déchets</div></div>
+      <div class="stat-box" data-hover><span class="label">Fondation</span><div class="value" style="font-size:16px">Semi-claustrale (avec champignon)</div></div>
     </div>
 
     <h3 class="sub-heading animated-item d-10" style="font-size:20px; border:none; margin-top:20px;">
       Spécificités d'Élevage
     </h3>
 
+    <p class="animated-item d-10">
+      Le point critique est la <b>stabilité du champignon</b> : humidité contrôlée, bonne aération, zéro contamination,
+      et une zone “déchets” séparée. Les feuilles doivent être <b>sans pesticides</b> (plantes bio/maison), rincées et séchées.
+      Les changements doivent être progressifs pour éviter les crashs de culture.
+    </p>
 
-    <ul class="animated-item d-10">
-      <li><b>Évasion :</b> espèce rapide → anti-évasion propre (huile/paraffine/PTFE selon ton matos).</li>
-      <li><b>Nid :</b> préfère souvent le sec ; humidifier seulement une partie du nid pour laisser le choix.</li>
-      <li><b>Alimentation :</b> sucre disponible (miel dilué/sirop) + protéines (insectes) 1–2×/semaine selon la
-        taille.</li>
-      <li><b>Repos saisonnier :</b> la diapause légère stabilise la colonie sur le long terme.</li>
+    <h3 class="sub-heading animated-item d-11" style="font-size:20px; border:none; margin-top:20px;">
+      Alimentation &amp; Hydratation
+    </h3>
+
+    <p class="animated-item d-11">
+      Les leafcutters utilisent les végétaux pour nourrir le champignon. La “diète” se pense comme un <b>apport de substrat</b> :
+      diversité + qualité + propreté. En plus, un apport sucré léger peut soutenir l’activité des ouvrières.
+      L’eau doit être disponible en continu, avec une vigilance extrême sur l’humidité (moisissures).
+    </p>
+
+    <div class="taxonomy-grid animated-item d-11" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="stat-box" data-hover>
+        <span class="label">Végétaux (substrat)</span>
+        <div class="value" style="font-size:16px;">Quotidien</div>
+      </div>
+
+      <div class="stat-box" data-hover>
+        <span class="label">Sucres (complément)</span>
+        <div class="value" style="font-size:16px;">1–2× / semaine</div>
+      </div>
+
+      <div class="stat-box" data-hover>
+        <span class="label">Hydratation</span>
+        <div class="value" style="font-size:16px;">Eau en continu</div>
+      </div>
+
+      <div class="stat-box" data-hover>
+        <span class="label">Qualité feuilles</span>
+        <div class="value" style="font-size:16px;">Sans pesticides</div>
+      </div>
+
+      <div class="stat-box" data-hover>
+        <span class="label">Fréquence ajustée</span>
+        <div class="value" style="font-size:16px;">Selon champignon</div>
+      </div>
+
+      <div class="stat-box" data-hover>
+        <span class="label">Nettoyage</span>
+        <div class="value" style="font-size:16px;">Déchets séparés</div>
+      </div>
+    </div>
+
+    <ul class="animated-item d-12">
+      <li><b>Substrat végétal :</b> feuilles variées (bio), pétales, jeunes pousses. Rincer + sécher (pas d’eau stagnante sur les feuilles).</li>
+      <li><b>Éviter :</b> plantes traitées, feuilles très résineuses/irritantes, végétaux moisis, apports trop “gras” qui déstabilisent la culture.</li>
+      <li><b>Sucres :</b> micro-apports (eau+miel/sirop) pour soutenir l’énergie des ouvrières, sans surcharger l’ADC.</li>
+      <li><b>Eau :</b> abreuvoir sécurisé (éponge/coton) + gestion fine de l’humidité de la chambre fongique.</li>
+      <li><b>Astuce :</b> si le champignon pâlit ou régresse, réduire les apports, améliorer l’aération et renforcer l’hygiène/zone déchets.</li>
     </ul>
-<h3 class="sub-heading animated-item d-11" style="font-size:20px; border:none; margin-top:20px;">
-  Alimentation &amp; Hydratation
-</h3>
-
-<p class="animated-item d-11">
-  <i>Aphaenogaster senilis</i> est une espèce très active : elle consomme à la fois des sucres (énergie) et des protéines
-  (croissance du couvain). L’objectif est d’avoir une base sucrée régulière, et des apports protéiques adaptés à la taille
-  de la colonie, tout en assurant un point d’eau propre.
-</p>
-
-<div class="taxonomy-grid animated-item d-11">
-  <div class="stat-box" data-hover>
-    <span class="label">Sucres (base)</span>
-    <div class="value" style="font-size:16px">2–3× / semaine</div>
   </div>
-  <div class="stat-box" data-hover>
-    <span class="label">Protéines (couvain)</span>
-    <div class="value" style="font-size:16px">1–2× / semaine</div>
-  </div>
-  <div class="stat-box" data-hover>
-    <span class="label">Hydratation</span>
-    <div class="value" style="font-size:16px">Eau en continu</div>
-  </div>
-  <div class="stat-box" data-hover>
-    <span class="label">Graines</span>
-    <div class="value" style="font-size:16px">Optionnel</div>
-  </div>
-  <div class="stat-box" data-hover>
-    <span class="label">Fréquence ajustée</span>
-    <div class="value" style="font-size:16px">Selon couvain</div>
-  </div>
-  <div class="stat-box" data-hover>
-    <span class="label">Nettoyage</span>
-    <div class="value" style="font-size:16px">Restes à retirer</div>
-  </div>
-</div>
-
-<ul class="animated-item d-12">
-  <li><b>Sucres :</b> sirop (eau + miel / eau + sucre / sirop du commerce) en très petite quantité, renouvelé régulièrement.</li>
-  <li><b>Protéines :</b> insectes (blattes, grillons, vers de farine) adaptés à la taille des ouvrières, idéalement pré-tué/coupé pour faciliter l’accès.</li>
-  <li><b>Hydratation :</b> abreuvoir/ coton humide dans l’ADC + zone humidifiée du nid (sans détremper tout le nid).</li>
-  <li><b>Hygiène :</b> retire les restes (insectes, sirop) avant moisissure, surtout en période chaude.</li>
-  <li><b>Astuce :</b> si la colonie a beaucoup de couvain, augmente légèrement les protéines (2×/semaine), sinon reste sur 1×/semaine.</li>
-</ul>
-
-  </div>
-  
 
   <footer>
     <div class="footer-content">
@@ -1269,7 +1054,7 @@
         <h4>Exploration</h4>
         <a href="../index.html" class="footer-link" data-hover>Index des Espèces</a>
         <a href="#" class="footer-link" data-hover>Carte Géographique</a>
-        <a href="#" class="footer-link" data-hover>Taxonomie</a>
+        <a href="https://www.gbif.org/dataset/13b70480-bd69-11dd-b15f-b8a03c50a862" class="footer-link" target="_blank" data-hover>Taxonomie</a>
       </div>
 
       <div class="footer-col">
@@ -1285,18 +1070,10 @@
         <a href="#" class="footer-link" data-hover>Contact Support</a>
       </div>
     </div>
-
-    <div class="footer-bottom">
-      <span>&copy; 2024 MYRMEX ARCHIVE. Tous droits réservés.</span>
-      <div class="sys-status">
-        <div class="status-dot"></div>
-        <span>SYSTEM STATUS: OPERATIONAL</span>
-      </div>
-    </div>
   </footer>
 
   <script>
-    // 1. GESTION DU THÈME
+    // 1. THÈME
     const body = document.body;
     const themeToggle = document.getElementById('theme-toggle');
     const moonIcon = document.getElementById('moon-icon');
@@ -1317,8 +1094,6 @@
     }
 
     const savedTheme = localStorage.getItem('theme');
-
-    // 👉 clair par défaut si rien n'est stocké
     const initialIsLightMode = savedTheme === null || savedTheme === 'light';
     applyTheme(initialIsLightMode);
 
@@ -1332,10 +1107,9 @@
         localStorage.setItem('theme', 'light');
       }
     }
-
     themeToggle.addEventListener('click', toggleTheme);
 
-    // 2. CURSEUR (désactivé visuellement mais on garde la logique)
+    // 2. CURSEUR (désactivé visuellement)
     const cursor = document.getElementById('cursor');
     document.addEventListener('mousemove', (e) => {
       cursor.style.left = e.clientX + 'px';
@@ -1360,10 +1134,9 @@
         }
       });
     }, { threshold: 0.1 });
-
     animatedElements.forEach(el => observer.observe(el));
 
-    // 4. ANIMATION CANVAS (swarm)
+    // 4. CANVAS
     const canvas = document.getElementById('swarmSectionCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -1380,47 +1153,35 @@
       mouse.y = e.clientY - rect.top;
     });
 
+    window.addEventListener('resize', init);
+
     class Particle {
       constructor() {
-        this.reset();
-      }
-      reset() {
-        this.x = Math.random() * w;
-        this.y = Math.random() * h;
-        this.vx = (Math.random() - 0.5) * 1.2;
-        this.vy = (Math.random() - 0.5) * 1.2;
-        this.size = Math.random() * 2 + 1;
-        this.color = "rgba(205,133,63,0.9)";
+        this.x = Math.random() * w; this.y = Math.random() * h;
+        this.vx = (Math.random() - 0.5) * 0.8; this.vy = (Math.random() - 0.5) * 0.8;
+        this.size = Math.random() * 2 + 1; this.color = '#cd853f';
       }
       update() {
-        this.x += this.vx;
-        this.y += this.vy;
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > w) this.vx *= -1;
+        if (this.y < 0 || this.y > h) this.vy *= -1;
 
-        if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) this.reset();
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (mouse.x !== null) {
-          const dx = this.x - mouse.x;
-          const dy = this.y - mouse.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < mouseDistance) {
-            const force = (mouseDistance - dist) / mouseDistance;
-            this.vx += (dx / dist) * force * 0.08;
-            this.vy += (dy / dist) * force * 0.08;
-          }
+        if (dist < mouseDistance && mouse.x !== null) {
+          let force = (mouseDistance - dist) / mouseDistance;
+          this.vx -= (dx / dist) * force * 0.08;
+          this.vy -= (dy / dist) * force * 0.08;
         }
       }
       draw() {
-        ctx.save();
-        ctx.translate(this.x, this.y);
+        ctx.save(); ctx.translate(this.x, this.y);
         ctx.rotate(Math.atan2(this.vy, this.vx));
-        ctx.beginPath();
-        ctx.moveTo(this.size, 0);
-        ctx.lineTo(-this.size, -this.size / 2);
-        ctx.lineTo(-this.size, this.size / 2);
-        ctx.closePath();
-        ctx.fillStyle = this.color;
-        ctx.fill();
-        ctx.restore();
+        ctx.beginPath(); ctx.moveTo(this.size, 0);
+        ctx.lineTo(-this.size, -this.size / 2); ctx.lineTo(-this.size, this.size / 2);
+        ctx.closePath(); ctx.fillStyle = this.color; ctx.fill(); ctx.restore();
       }
     }
 
@@ -1429,35 +1190,28 @@
       h = canvas.height = canvas.parentElement.clientHeight;
     }
     function init() {
-      particles = [];
-      resize();
+      particles = []; resize();
       for (let i = 0; i < particleCount; i++) particles.push(new Particle());
     }
     function animate() {
       ctx.clearRect(0, 0, w, h);
       particles.forEach(p => {
-        p.update();
-        p.draw();
+        p.update(); p.draw();
         particles.forEach(p2 => {
-          const dx = p.x - p2.x, dy = p.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          let dx = p.x - p2.x, dy = p.y - p2.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < connectionDistance) {
             ctx.beginPath();
             ctx.strokeStyle = `rgba(205, 133, 63, ${0.2 * (1 - dist / connectionDistance)})`;
-            ctx.lineWidth = 0.5;
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
+            ctx.lineWidth = 0.5; ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
           }
         });
       });
       requestAnimationFrame(animate);
     }
-
-    window.addEventListener('resize', init);
     init(); animate();
 
-    // 5. VIEW TOGGLE (3D/PHOTO) — photo par défaut
+    // 5) SWITCH 3D / PHOTO
     const viewToggle = document.getElementById('view-toggle');
     const ant3D = document.getElementById('ant-3d');
     const antPhoto = document.getElementById('ant-photo');
@@ -1465,7 +1219,6 @@
 
     function setView(mode) {
       viewToggle.setAttribute('data-view', mode);
-
       const isPhoto = mode === 'photo';
 
       ant3D.style.opacity = isPhoto ? '0' : '1';
@@ -1479,13 +1232,9 @@
       });
     }
 
-    viewBtns.forEach(btn => {
-      btn.addEventListener('click', () => setView(btn.dataset.viewBtn));
-    });
-
+    viewBtns.forEach(btn => btn.addEventListener('click', () => setView(btn.dataset.viewBtn)));
     setView('photo');
   </script>
 
 </body>
-
 </html>

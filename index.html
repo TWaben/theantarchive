@@ -1812,8 +1812,12 @@
 
     // Charger le thème
     const savedTheme = localStorage.getItem('theme');
-    const initialIsLightMode = savedTheme === 'light';
-    applyTheme(initialIsLightMode);
+
+// 👉 mode clair par défaut si rien n'est enregistré
+const initialIsLightMode = savedTheme === null || savedTheme === 'light';
+
+applyTheme(initialIsLightMode);
+
 
     // Bascule
     themeToggle.addEventListener('click', () => {
